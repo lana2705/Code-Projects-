@@ -107,8 +107,9 @@ export function calculatePaycheck(input: PaycheckInput): PaycheckResult {
   const payPeriods = PAY_PERIODS[input.payFrequency]
   const stateRate = STATE_TAX_RATES[input.state] ?? 0
 
-  // 1. Annualize gross.
-  const annualGross = input.grossSalary * payPeriods
+  // 1. Gross salary is entered as an ANNUAL figure. Pay frequency only
+  //    controls how the net (and per-paycheck deductions) are split.
+  const annualGross = input.grossSalary
 
   // 2. Annual pre-tax deductions (401k + health insurance).
   const annual401k = (input.retirement401kPercent / 100) * annualGross
@@ -166,7 +167,7 @@ export function calculatePaycheck(input: PaycheckInput): PaycheckResult {
     annualGross > 0 ? (totalTax / annualGross) * 100 : 0
 
   return {
-    grossPerPeriod: round2(input.grossSalary),
+    grossPerPeriod: round2(annualGross / payPeriods),
     federalTax: round2(federalTaxAnnual / payPeriods),
     stateTax: round2(stateTaxAnnual / payPeriods),
     socialSecurity: round2(socialSecurityAnnual / payPeriods),

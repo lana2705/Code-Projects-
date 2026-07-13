@@ -87,11 +87,11 @@ export default function PaycheckCalculator() {
           <div className="space-y-4">
             <h3 className="text-lg font-semibold text-navy">Income</h3>
             <div>
-              <label className={labelClass}>Gross salary</label>
+              <label className={labelClass}>Annual gross salary</label>
               <input
                 type="number"
                 inputMode="decimal"
-                placeholder="$0.00"
+                placeholder="$60,000.00"
                 value={grossSalary}
                 onChange={(e) => setGrossSalary(e.target.value)}
                 className={inputClass}
@@ -102,6 +102,7 @@ export default function PaycheckCalculator() {
             </div>
             <div>
               <label className={labelClass}>Pay frequency</label>
+              <p className="sr-only">How often you are paid</p>
               <select
                 value={payFrequency}
                 onChange={(e) =>
