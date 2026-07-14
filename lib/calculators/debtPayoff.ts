@@ -197,3 +197,112 @@ export function comparePayoffMethods(
   )
   return { avalanche, snowball, bestMethod, interestSaved }
 }
+
+/** Human-readable months → "4 yrs 11 mo" (or "50+ years" when capped). */
+export function formatMonths(months: number, cappedOut = false): string {
+  if (cappedOut || months >= MAX_MONTHS) return '50+ years'
+  const years = Math.floor(months / 12)
+  const rem = months % 12
+  const parts: string[] = []
+  if (years > 0) parts.push(`${years} yr${years > 1 ? 's' : ''}`)
+  if (rem > 0) parts.push(`${rem} mo`)
+  return parts.join(' ') || '0 mo'
+}
+
+export interface CombinedResult {
+  balance: number
+  weightedApr: number
+  monthlyPayment: number
+  months: number
+  totalInterestPaid: number
+  totalAmountPaid: number
+  payoffDate: Date
+  cappedOut: boolean
+  monthlySchedule: MonthlyPayment[]
+}
+
+/**
+ * Treat every debt as one combined "bucket": total balance, balance-weighted
+ * average APR, and the sum of all minimum payments plus any extra.
+ */
+export function calculateCombined(
+  debts: Debt[],
+  extraPayment = 0,
+): CombinedResult {
+  const balance = round2(debts.reduce((s, d) => s + d.balance, 0))
+  const weightedApr =
+    balance > 0
+      ? round2(debts.reduce((s, d) => s + d.balance * d.apr, 0) / balance)
+      : 0
+  const monthlyPayment = round2(
+    debts.reduce((s, d) => s + d.minimumPayment, 0) + extraPayment,
+  )
+  const combined: Debt = {
+    id: 'combined',
+    name: 'All debts',
+    balance,
+    apr: weightedApr,
+    minimumPayment: monthlyPayment,
+  }
+  // Extra is already folded into the combined minimum payment.
+  const r = simulate([combined], 0, 'avalanche')
+  return {
+    balance,
+    weightedApr,
+    monthlyPayment,
+    months: r.monthsToPayoff,
+    totalInterestPaid: r.totalInterestPaid,
+    totalAmountPaid: r.totalAmountPaid,
+    payoffDate: r.payoffDate,
+    cappedOut: r.cappedOut,
+    monthlySchedule: r.monthlySchedule,
+  }
+}
+
+export interface SingleDebtPlan {
+  debt: Debt
+  months: number
+  totalInterestPaid: number
+  totalAmountPaid: number
+  payoffDate: Date
+  cappedOut: boolean
+  monthlySchedule: MonthlyPayment[]
+}
+
+/** Standalone payoff plan for a single debt paying only its own minimum. */
+export function calculateSingleDebt(debt: Debt): SingleDebtPlan {
+  const r = simulate([debt], 0, 'avalanche')
+  return {
+    debt,
+    months: r.monthsToPayoff,
+    totalInterestPaid: r.totalInterestPaid,
+    totalAmountPaid: r.totalAmountPaid,
+    payoffDate: r.payoffDate,
+    cappedOut: r.cappedOut,
+    monthlySchedule: r.monthlySchedule,
+  }
+}
+
+export interface FirstDebtRecommendation {
+  debt: Debt
+  reason: string
+}
+
+/**
+ * Which debt to attack first. Follows the avalanche principle (highest APR),
+ * which minimizes total interest paid.
+ */
+export function recommendFirstDebt(
+  debts: Debt[],
+): FirstDebtRecommendation | null {
+  if (debts.length === 0) return null
+  const top = [...debts].sort((a, b) => b.apr - a.apr)[0]
+  const smallest = [...debts].sort((a, b) => a.balance - b.balance)[0]
+  const alsoSmallest = smallest.id === top.id
+  return {
+    debt: top,
+    reason: alsoSmallest
+      ? `It has the highest APR (${top.apr}%) and the smallest balance, so it's the clear first target — you'll cut the most interest and score a quick win.`
+      : `It has the highest APR (${top.apr}%), so clearing it first saves the most in interest (the avalanche method).`,
+  }
+}

@@ -49,6 +49,7 @@ export default function DebtPayoffCalculator() {
   const [warnings, setWarnings] = useState<string[]>([])
   const [comparison, setComparison] = useState<DebtComparison | null>(null)
   const [debts, setDebts] = useState<Debt[]>([])
+  const [calcExtra, setCalcExtra] = useState(0)
 
   const updateRow = (id: string, field: keyof DebtRow, value: string) => {
     setRows((prev) =>
@@ -117,6 +118,7 @@ export default function DebtPayoffCalculator() {
     const extra = Math.max(0, parseCurrencyInput(extraPayment) || 0)
     const result = comparePayoffMethods(parsed, extra)
     setDebts(parsed)
+    setCalcExtra(extra)
     setComparison(result)
   }
 
@@ -263,7 +265,11 @@ export default function DebtPayoffCalculator() {
       )}
 
       {comparison && (
-        <DebtResultsPanel comparison={comparison} debts={debts} />
+        <DebtResultsPanel
+          comparison={comparison}
+          debts={debts}
+          extraPayment={calcExtra}
+        />
       )}
     </div>
   )
