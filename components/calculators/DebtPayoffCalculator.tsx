@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useRef, useEffect } from 'react'
 import { Trash2, Plus } from 'lucide-react'
 import type { Debt } from '@/types/calculator'
 import {
@@ -49,6 +49,14 @@ export default function DebtPayoffCalculator() {
   const [warnings, setWarnings] = useState<string[]>([])
   const [comparison, setComparison] = useState<DebtComparison | null>(null)
   const [debts, setDebts] = useState<Debt[]>([])
+  const resultsRef = useRef<HTMLDivElement>(null)
+
+  // Scroll the results into view after a successful calculation.
+  useEffect(() => {
+    if (comparison && resultsRef.current) {
+      resultsRef.current.scrollIntoView({ behavior: 'smooth', block: 'start' })
+    }
+  }, [comparison])
 
   const updateRow = (id: string, field: keyof DebtRow, value: string) => {
     setRows((prev) =>
@@ -242,7 +250,7 @@ export default function DebtPayoffCalculator() {
         <button
           type="button"
           onClick={handleCalculate}
-          className="mt-6 w-full rounded-btn bg-navy px-6 py-3 font-semibold text-white transition-colors hover:bg-[#16264d] sm:w-auto"
+          className="mt-6 w-full rounded-btn bg-navy px-6 py-3 font-semibold text-white transition-all hover:bg-[#16264d] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-navy focus-visible:ring-offset-2 active:scale-[0.98] active:bg-[#111f43] sm:w-auto"
         >
           Calculate my payoff plan
         </button>
@@ -263,7 +271,9 @@ export default function DebtPayoffCalculator() {
       )}
 
       {comparison && (
-        <DebtResultsPanel comparison={comparison} debts={debts} />
+        <div ref={resultsRef} className="scroll-mt-20">
+          <DebtResultsPanel comparison={comparison} debts={debts} />
+        </div>
       )}
     </div>
   )

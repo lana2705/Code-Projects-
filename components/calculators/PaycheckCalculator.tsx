@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useRef, useEffect } from 'react'
 import type {
   FilingStatus,
   PayFrequency,
@@ -45,6 +45,14 @@ export default function PaycheckCalculator() {
     retirement401k?: string
   }>({})
   const [result, setResult] = useState<PaycheckResult | null>(null)
+  const resultsRef = useRef<HTMLDivElement>(null)
+
+  // Scroll the results into view after a successful calculation.
+  useEffect(() => {
+    if (result && resultsRef.current) {
+      resultsRef.current.scrollIntoView({ behavior: 'smooth', block: 'start' })
+    }
+  }, [result])
 
   const handleCalculate = () => {
     const nextErrors: {
@@ -219,13 +227,17 @@ export default function PaycheckCalculator() {
         <button
           type="button"
           onClick={handleCalculate}
-          className="mt-6 w-full rounded-btn bg-navy px-6 py-3 font-semibold text-white transition-colors hover:bg-[#16264d]"
+          className="mt-6 w-full rounded-btn bg-navy px-6 py-3 font-semibold text-white transition-all hover:bg-[#16264d] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-navy focus-visible:ring-offset-2 active:scale-[0.98] active:bg-[#111f43]"
         >
           Calculate my take-home pay
         </button>
       </div>
 
-      {result && <PaycheckResultsPanel result={result} />}
+      {result && (
+        <div ref={resultsRef} className="scroll-mt-20">
+          <PaycheckResultsPanel result={result} />
+        </div>
+      )}
     </div>
   )
 }
