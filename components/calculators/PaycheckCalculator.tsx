@@ -9,6 +9,8 @@ import type {
 import { calculatePaycheck } from '@/lib/calculators/paycheck'
 import { STATES_ALPHABETICAL } from '@/lib/calculators/stateTaxRates'
 import PaycheckResultsPanel from './PaycheckResultsPanel'
+import CurrencyInput from '@/components/shared/CurrencyInput'
+import { parseCurrencyInput } from '@/lib/format'
 
 const FREQUENCIES: { value: PayFrequency; label: string }[] = [
   { value: 'annual', label: 'Annual' },
@@ -44,7 +46,7 @@ export default function PaycheckCalculator() {
 
   const handleCalculate = () => {
     const nextErrors: { grossSalary?: string; state?: string } = {}
-    const gross = parseFloat(grossSalary)
+    const gross = parseCurrencyInput(grossSalary)
     if (!grossSalary.trim() || isNaN(gross) || gross <= 0) {
       nextErrors.grossSalary = 'Enter a gross salary greater than 0'
     }
@@ -70,10 +72,13 @@ export default function PaycheckCalculator() {
         filingStatus,
         state,
         retirement401kPercent: clamp(retirement401k, 0, 100),
-        healthInsurancePerPeriod: Math.max(0, parseFloat(healthInsurance) || 0),
+        healthInsurancePerPeriod: Math.max(
+          0,
+          parseCurrencyInput(healthInsurance) || 0,
+        ),
         additionalWithholdingPerPeriod: Math.max(
           0,
-          parseFloat(additionalWithholding) || 0,
+          parseCurrencyInput(additionalWithholding) || 0,
         ),
       }),
     )
@@ -88,12 +93,11 @@ export default function PaycheckCalculator() {
             <h3 className="text-lg font-semibold text-navy">Income</h3>
             <div>
               <label className={labelClass}>Annual gross salary</label>
-              <input
-                type="number"
-                inputMode="decimal"
+              <CurrencyInput
+                aria-label="Annual gross salary"
                 placeholder="$60,000.00"
                 value={grossSalary}
-                onChange={(e) => setGrossSalary(e.target.value)}
+                onChange={setGrossSalary}
                 className={inputClass}
               />
               {errors.grossSalary && (
@@ -176,12 +180,11 @@ export default function PaycheckCalculator() {
               <label className={labelClass}>
                 Health insurance premium per paycheck
               </label>
-              <input
-                type="number"
-                inputMode="decimal"
+              <CurrencyInput
+                aria-label="Health insurance premium per paycheck"
                 placeholder="$0.00"
                 value={healthInsurance}
-                onChange={(e) => setHealthInsurance(e.target.value)}
+                onChange={setHealthInsurance}
                 className={inputClass}
               />
             </div>
@@ -189,12 +192,11 @@ export default function PaycheckCalculator() {
               <label className={labelClass}>
                 Additional federal withholding per paycheck
               </label>
-              <input
-                type="number"
-                inputMode="decimal"
+              <CurrencyInput
+                aria-label="Additional federal withholding per paycheck"
                 placeholder="$0.00"
                 value={additionalWithholding}
-                onChange={(e) => setAdditionalWithholding(e.target.value)}
+                onChange={setAdditionalWithholding}
                 className={inputClass}
               />
             </div>

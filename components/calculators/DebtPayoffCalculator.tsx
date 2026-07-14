@@ -9,6 +9,8 @@ import {
   type DebtComparison,
 } from '@/lib/calculators/debtPayoff'
 import DebtResultsPanel from './DebtResultsPanel'
+import CurrencyInput from '@/components/shared/CurrencyInput'
+import { parseCurrencyInput } from '@/lib/format'
 
 interface DebtRow {
   id: string
@@ -69,9 +71,9 @@ export default function DebtPayoffCalculator() {
 
     rows.forEach((r) => {
       const rowErrors: RowErrors = {}
-      const balance = parseFloat(r.balance)
+      const balance = parseCurrencyInput(r.balance)
       const apr = parseFloat(r.apr)
-      const minimumPayment = parseFloat(r.minimumPayment)
+      const minimumPayment = parseCurrencyInput(r.minimumPayment)
 
       if (!r.name.trim()) rowErrors.name = 'Required'
       if (!r.balance.trim() || isNaN(balance) || balance <= 0)
@@ -112,7 +114,7 @@ export default function DebtPayoffCalculator() {
 
     setWarnings(debtsWithInsufficientMinimum(parsed))
 
-    const extra = Math.max(0, parseFloat(extraPayment) || 0)
+    const extra = Math.max(0, parseCurrencyInput(extraPayment) || 0)
     const result = comparePayoffMethods(parsed, extra)
     setDebts(parsed)
     setComparison(result)
@@ -159,14 +161,11 @@ export default function DebtPayoffCalculator() {
                   <label className="mb-1 block text-xs text-muted sm:hidden">
                     Balance
                   </label>
-                  <input
-                    type="number"
-                    inputMode="decimal"
+                  <CurrencyInput
+                    aria-label="Balance"
                     placeholder="$0.00"
                     value={row.balance}
-                    onChange={(ev) =>
-                      updateRow(row.id, 'balance', ev.target.value)
-                    }
+                    onChange={(v) => updateRow(row.id, 'balance', v)}
                     className={inputClass}
                   />
                   {e.balance && (
@@ -191,14 +190,11 @@ export default function DebtPayoffCalculator() {
                   <label className="mb-1 block text-xs text-muted sm:hidden">
                     Min. payment
                   </label>
-                  <input
-                    type="number"
-                    inputMode="decimal"
+                  <CurrencyInput
+                    aria-label="Minimum payment"
                     placeholder="$0.00"
                     value={row.minimumPayment}
-                    onChange={(ev) =>
-                      updateRow(row.id, 'minimumPayment', ev.target.value)
-                    }
+                    onChange={(v) => updateRow(row.id, 'minimumPayment', v)}
                     className={inputClass}
                   />
                   {e.minimumPayment && (
@@ -234,12 +230,11 @@ export default function DebtPayoffCalculator() {
           <label className="mb-1 block text-sm font-medium text-navy">
             Extra monthly payment (optional)
           </label>
-          <input
-            type="number"
-            inputMode="decimal"
+          <CurrencyInput
+            aria-label="Extra monthly payment"
             placeholder="$0.00"
             value={extraPayment}
-            onChange={(ev) => setExtraPayment(ev.target.value)}
+            onChange={(v) => setExtraPayment(v)}
             className={inputClass}
           />
         </div>

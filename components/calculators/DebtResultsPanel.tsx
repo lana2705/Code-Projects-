@@ -182,7 +182,7 @@ export default function DebtResultsPanel({
             description="Smallest balance first."
           />
         </div>
-        {interestSaved > 0.5 && (
+        {interestSaved > 0.5 ? (
           <p className="mt-3 text-sm text-muted">
             The <strong className="text-navy capitalize">{bestMethod}</strong>{' '}
             method saves you{' '}
@@ -190,6 +190,15 @@ export default function DebtResultsPanel({
               {formatCurrency(interestSaved)}
             </strong>{' '}
             in interest.
+          </p>
+        ) : (
+          <p className="mt-3 text-sm text-muted">
+            For these debts, both strategies pay off in the same order and cost
+            the same.{' '}
+            {debts.length <= 1
+              ? 'Add more debts'
+              : 'Add an extra monthly payment'}{' '}
+            to see the avalanche method pull ahead.
           </p>
         )}
       </div>

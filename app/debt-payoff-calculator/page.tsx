@@ -49,6 +49,16 @@ const debtFAQs: FAQItem[] = [
     answer:
       'It uses standard amortization math and is a reliable estimate. Results assume your balances, rates, and payments stay constant. Actual payoff may vary if rates change or you miss payments. Always verify with your lender.',
   },
+  {
+    question: 'How does the debt payoff calculator work?',
+    answer:
+      "Enter each of your debts — credit cards, personal loans, student loans, car payments, anything with a balance and an interest rate. Add the minimum payment for each, then optionally add an extra monthly amount you can commit to paying down debt. The calculator runs two simulations simultaneously: the avalanche method (highest APR first) and the snowball method (lowest balance first). You'll see exactly how long each takes, how much interest you'll pay, and which one saves you more money. Most people save hundreds or thousands of dollars by switching from minimum payments to a structured payoff strategy. The sooner you start, the more you save.",
+  },
+  {
+    question: 'Avalanche vs snowball: which saves more?',
+    answer:
+      'In almost every scenario, the avalanche method saves more money because it targets the most expensive debt first. The difference can be significant — on a $20,000 debt portfolio with mixed interest rates, the avalanche method often saves $1,000–$3,000 in interest compared to the snowball. That said, personal finance is personal. Research shows that people who feel progress are more likely to stay on track. If the snowball method keeps you motivated and you actually stick to it, it beats an avalanche plan you abandon after three months.',
+  },
 ]
 
 const webAppSchema = {
@@ -89,44 +99,6 @@ export default function DebtPayoffPage() {
       <EtsyCTA page="debt" />
       <AdSenseSlot slot="DEBT_CALC_RESULTS" />
       <FAQAccordion items={debtFAQs} />
-
-      {/* SEO prose */}
-      <article className="prose-custom mt-12 space-y-8">
-        <section>
-          <h2 className="text-[28px] font-semibold text-navy">
-            How does the debt payoff calculator work?
-          </h2>
-          <p className="mt-3 text-muted">
-            Enter each of your debts — credit cards, personal loans, student
-            loans, car payments, anything with a balance and an interest rate.
-            Add the minimum payment for each, then optionally add an extra
-            monthly amount you can commit to paying down debt. The calculator
-            runs two simulations simultaneously: the avalanche method (highest
-            APR first) and the snowball method (lowest balance first).
-            You&apos;ll see exactly how long each takes, how much interest
-            you&apos;ll pay, and which one saves you more money. Most people save
-            hundreds or thousands of dollars by switching from minimum payments
-            to a structured payoff strategy. The sooner you start, the more you
-            save.
-          </p>
-        </section>
-        <section>
-          <h2 className="text-[28px] font-semibold text-navy">
-            Avalanche vs snowball: which saves more?
-          </h2>
-          <p className="mt-3 text-muted">
-            In almost every scenario, the avalanche method saves more money
-            because it targets the most expensive debt first. The difference can
-            be significant — on a $20,000 debt portfolio with mixed interest
-            rates, the avalanche method often saves $1,000–$3,000 in interest
-            compared to the snowball. That said, personal finance is personal.
-            Research shows that people who feel progress are more likely to stay
-            on track. If the snowball method keeps you motivated and you actually
-            stick to it, it beats an avalanche plan you abandon after three
-            months.
-          </p>
-        </section>
-      </article>
     </div>
   )
 }
