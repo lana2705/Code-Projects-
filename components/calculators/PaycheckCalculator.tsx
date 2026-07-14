@@ -27,8 +27,8 @@ const FILING_STATUSES: { value: FilingStatus; label: string }[] = [
 ]
 
 const inputClass =
-  'w-full rounded-lg border border-border bg-white px-4 py-3 text-base outline-none focus:border-navy focus:ring-1 focus:ring-navy'
-const labelClass = 'mb-2 block text-base font-semibold text-navy'
+  'w-full rounded-input border border-border px-3 py-2 text-sm outline-none focus:border-navy focus:ring-1 focus:ring-navy'
+const labelClass = 'mb-1 block text-sm font-medium text-navy'
 
 export default function PaycheckCalculator() {
   const [grossSalary, setGrossSalary] = useState('')
@@ -110,9 +110,8 @@ export default function PaycheckCalculator() {
           <div>
             <label className={labelClass}>Gross salary (annual)</label>
             <CurrencyInput
-              prefix
               aria-label="Gross salary (annual)"
-              placeholder="85,000"
+              placeholder="$60,000.00"
               value={grossSalary}
               onChange={setGrossSalary}
               className={inputClass}
@@ -184,7 +183,7 @@ export default function PaycheckCalculator() {
                 onChange={(e) => setRetirement401k(e.target.value)}
                 className={`${inputClass} pr-8`}
               />
-              <span className="pointer-events-none absolute right-4 top-1/2 -translate-y-1/2 text-muted">
+              <span className="pointer-events-none absolute right-3 top-1/2 -translate-y-1/2 text-sm text-muted">
                 %
               </span>
             </div>
@@ -200,9 +199,8 @@ export default function PaycheckCalculator() {
           <div>
             <label className={labelClass}>Health insurance / paycheck</label>
             <CurrencyInput
-              prefix
               aria-label="Health insurance per paycheck"
-              placeholder="0"
+              placeholder="$0.00"
               value={healthInsurance}
               onChange={setHealthInsurance}
               className={inputClass}
@@ -214,9 +212,8 @@ export default function PaycheckCalculator() {
               Extra federal withholding / paycheck
             </label>
             <CurrencyInput
-              prefix
               aria-label="Extra federal withholding per paycheck"
-              placeholder="0"
+              placeholder="$0.00"
               value={additionalWithholding}
               onChange={setAdditionalWithholding}
               className={inputClass}
