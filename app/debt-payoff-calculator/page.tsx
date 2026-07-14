@@ -5,7 +5,8 @@ import AdSenseSlot from '@/components/shared/AdSenseSlot'
 import FAQAccordion, { type FAQItem } from '@/components/shared/FAQAccordion'
 import { SITE_NAME, SITE_URL } from '@/lib/constants'
 
-const TITLE = 'Debt Payoff Calculator — Avalanche vs Snowball | FinCalcHub'
+const TITLE =
+  'Debt Payoff Calculator — Avalanche vs Snowball | TheFinanceBeacon'
 const DESCRIPTION =
   'Free debt payoff calculator. Compare the avalanche and snowball methods side by side. See your debt-free date and total interest paid in seconds.'
 const URL = `${SITE_URL}/debt-payoff-calculator`
@@ -42,12 +43,12 @@ const debtFAQs: FAQItem[] = [
   {
     question: 'How does the extra monthly payment work?',
     answer:
-      'Any extra payment you add is applied to your priority debt each month, on top of the minimum payments. Even an extra $50/month can dramatically reduce your payoff timeline.',
+      "Any extra payment you add is applied to your priority debt each month, on top of the minimum payments. Even an extra $50/month can dramatically reduce your payoff timeline. Once a debt is fully paid off, that debt's minimum payment automatically rolls into the extra payment pool and gets applied to the next priority debt — this is called the 'debt rollover' effect and is what makes structured payoff so powerful.",
   },
   {
     question: 'Is this calculator accurate?',
     answer:
-      'It uses standard amortization math and is a reliable estimate. Results assume your balances, rates, and payments stay constant. Actual payoff may vary if rates change or you miss payments. Always verify with your lender.',
+      'The calculator uses standard amortization math and provides a reliable estimate of your payoff timeline and total interest. Results assume your balances, interest rates, and payment amounts stay constant throughout the payoff period. Real-world results will vary if you miss payments, rates change, or you add new debt. Always verify with your lender for exact payoff figures.',
   },
   {
     question: 'How does the debt payoff calculator work?',
@@ -85,11 +86,13 @@ export default function DebtPayoffPage() {
 
       <h1 className="text-4xl font-bold text-navy">Debt Payoff Calculator</h1>
       <p className="mt-4 text-lg text-muted">
-        See exactly when you&apos;ll be debt-free — and how much interest
-        you&apos;ll pay getting there. Enter your debts below, choose an extra
-        monthly payment, and compare the two most popular payoff strategies:
-        avalanche (highest interest first) and snowball (smallest balance
-        first).
+        Enter your debts below to see your estimated debt-free date, total
+        interest paid, and a side-by-side comparison of the two most effective
+        payoff strategies. The avalanche method (highest interest rate first)
+        saves the most money. The snowball method (smallest balance first)
+        builds momentum with quick wins. See which one works better for your
+        situation — and how much faster an extra monthly payment gets you to
+        zero.
       </p>
 
       <div className="mt-8">

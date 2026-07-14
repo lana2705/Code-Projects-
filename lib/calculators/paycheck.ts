@@ -14,51 +14,51 @@ interface Bracket {
   rate: number
 }
 
-// 2024 federal income tax brackets.
+// 2026 federal income tax brackets.
 const BRACKETS: Record<FilingStatus, Bracket[]> = {
   single: [
-    { min: 0, max: 11600, rate: 0.1 },
-    { min: 11600, max: 47150, rate: 0.12 },
-    { min: 47150, max: 100525, rate: 0.22 },
-    { min: 100525, max: 191950, rate: 0.24 },
-    { min: 191950, max: 243725, rate: 0.32 },
-    { min: 243725, max: 609350, rate: 0.35 },
-    { min: 609350, max: Infinity, rate: 0.37 },
+    { min: 0, max: 12400, rate: 0.1 },
+    { min: 12400, max: 50400, rate: 0.12 },
+    { min: 50400, max: 105700, rate: 0.22 },
+    { min: 105700, max: 201775, rate: 0.24 },
+    { min: 201775, max: 256225, rate: 0.32 },
+    { min: 256225, max: 640600, rate: 0.35 },
+    { min: 640600, max: Infinity, rate: 0.37 },
   ],
   married_separately: [
-    { min: 0, max: 11600, rate: 0.1 },
-    { min: 11600, max: 47150, rate: 0.12 },
-    { min: 47150, max: 100525, rate: 0.22 },
-    { min: 100525, max: 191950, rate: 0.24 },
-    { min: 191950, max: 243725, rate: 0.32 },
-    { min: 243725, max: 609350, rate: 0.35 },
-    { min: 609350, max: Infinity, rate: 0.37 },
+    { min: 0, max: 12400, rate: 0.1 },
+    { min: 12400, max: 50400, rate: 0.12 },
+    { min: 50400, max: 105700, rate: 0.22 },
+    { min: 105700, max: 201775, rate: 0.24 },
+    { min: 201775, max: 256225, rate: 0.32 },
+    { min: 256225, max: 640600, rate: 0.35 },
+    { min: 640600, max: Infinity, rate: 0.37 },
   ],
   married_jointly: [
-    { min: 0, max: 23200, rate: 0.1 },
-    { min: 23200, max: 94300, rate: 0.12 },
-    { min: 94300, max: 201050, rate: 0.22 },
-    { min: 201050, max: 383900, rate: 0.24 },
-    { min: 383900, max: 487450, rate: 0.32 },
-    { min: 487450, max: 731200, rate: 0.35 },
-    { min: 731200, max: Infinity, rate: 0.37 },
+    { min: 0, max: 24800, rate: 0.1 },
+    { min: 24800, max: 100800, rate: 0.12 },
+    { min: 100800, max: 211400, rate: 0.22 },
+    { min: 211400, max: 403550, rate: 0.24 },
+    { min: 403550, max: 512450, rate: 0.32 },
+    { min: 512450, max: 768700, rate: 0.35 },
+    { min: 768700, max: Infinity, rate: 0.37 },
   ],
   head_of_household: [
-    { min: 0, max: 16550, rate: 0.1 },
-    { min: 16550, max: 63100, rate: 0.12 },
-    { min: 63100, max: 100500, rate: 0.22 },
-    { min: 100500, max: 191950, rate: 0.24 },
-    { min: 191950, max: 243700, rate: 0.32 },
-    { min: 243700, max: 609350, rate: 0.35 },
-    { min: 609350, max: Infinity, rate: 0.37 },
+    { min: 0, max: 17700, rate: 0.1 },
+    { min: 17700, max: 67450, rate: 0.12 },
+    { min: 67450, max: 105700, rate: 0.22 },
+    { min: 105700, max: 201775, rate: 0.24 },
+    { min: 201775, max: 256200, rate: 0.32 },
+    { min: 256200, max: 640600, rate: 0.35 },
+    { min: 640600, max: Infinity, rate: 0.37 },
   ],
 }
 
 const STANDARD_DEDUCTION: Record<FilingStatus, number> = {
-  single: 14600,
-  married_jointly: 29200,
-  married_separately: 14600,
-  head_of_household: 21900,
+  single: 16100,
+  married_jointly: 32200,
+  married_separately: 16100,
+  head_of_household: 24150,
 }
 
 const PAY_PERIODS: Record<PayFrequency, number> = {
@@ -68,7 +68,10 @@ const PAY_PERIODS: Record<PayFrequency, number> = {
   weekly: 52,
 }
 
-// FICA constants (2024).
+// Employee 401(k) elective-deferral limit (under age 50).
+const RETIREMENT_401K_LIMIT = 23000
+
+// FICA constants. Social Security wage base and Medicare thresholds.
 const SS_WAGE_BASE = 168600
 const SS_RATE = 0.062
 const MEDICARE_RATE = 0.0145
@@ -111,8 +114,11 @@ export function calculatePaycheck(input: PaycheckInput): PaycheckResult {
   //    controls how the net (and per-paycheck deductions) are split.
   const annualGross = input.grossSalary
 
-  // 2. Annual pre-tax deductions (401k + health insurance).
-  const annual401k = (input.retirement401kPercent / 100) * annualGross
+  // 2. Annual pre-tax deductions (401k + health insurance). The 401(k)
+  //    contribution is capped at the IRS annual elective-deferral limit.
+  const rawAnnual401k = (input.retirement401kPercent / 100) * annualGross
+  const annual401k = Math.min(rawAnnual401k, RETIREMENT_401K_LIMIT)
+  const retirement401kCapped = rawAnnual401k > RETIREMENT_401K_LIMIT + 0.005
   const annualHealth = input.healthInsurancePerPeriod * payPeriods
   const annualPreTax = annual401k + annualHealth
 
@@ -173,6 +179,7 @@ export function calculatePaycheck(input: PaycheckInput): PaycheckResult {
     socialSecurity: round2(socialSecurityAnnual / payPeriods),
     medicare: round2(medicareAnnual / payPeriods),
     retirement401k: round2(annual401k / payPeriods),
+    retirement401kCapped,
     healthInsurance: round2(input.healthInsurancePerPeriod),
     additionalWithholding: round2(input.additionalWithholdingPerPeriod),
     netPerPeriod: round2(netPerPeriod),

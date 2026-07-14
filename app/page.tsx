@@ -4,14 +4,14 @@ import { TrendingDown, Wallet } from 'lucide-react'
 import { SITE_NAME, SITE_URL } from '@/lib/constants'
 
 export const metadata: Metadata = {
-  title: 'Free Finance Calculators — Built for Real Life | FinCalcHub',
+  title: 'Your Money, Clearly Calculated | TheFinanceBeacon',
   description:
-    'Free finance calculators for real people. Calculate your take-home pay, plan your debt payoff, and keep more of what you earn.',
+    'Free tools that show you exactly where your paycheck goes — and exactly how fast you can get out of debt. No signup, no data stored.',
   alternates: { canonical: SITE_URL },
   openGraph: {
-    title: 'Free Finance Calculators — Built for Real Life | FinCalcHub',
+    title: 'Your Money, Clearly Calculated | TheFinanceBeacon',
     description:
-      'Free finance calculators for real people. Calculate your take-home pay, plan your debt payoff, and keep more of what you earn.',
+      'Free tools that show you exactly where your paycheck goes — and exactly how fast you can get out of debt. No signup, no data stored.',
     url: SITE_URL,
     siteName: SITE_NAME,
     images: ['/og-image.png'],
@@ -53,11 +53,11 @@ export default function HomePage() {
       {/* Hero */}
       <section className="py-16 text-center sm:py-24">
         <h1 className="mx-auto max-w-3xl text-balance text-4xl font-bold leading-tight text-navy sm:text-[44px]">
-          Free Finance Calculators. Built for Real Life.
+          Your Money, Clearly Calculated.
         </h1>
         <p className="mx-auto mt-5 max-w-2xl text-balance text-lg text-muted">
-          Figure out your take-home pay, crush your debt faster, and keep more
-          of what you earn.
+          Free tools that show you exactly where your paycheck goes — and
+          exactly how fast you can get out of debt.
         </p>
         <div className="mt-8 flex flex-col items-center justify-center gap-4 sm:flex-row">
           <Link
@@ -114,8 +114,8 @@ export default function HomePage() {
       {/* Footer note */}
       <section className="pb-16 text-center">
         <p className="text-sm text-muted">
-          More calculators coming soon. Built by a personal finance nerd in San
-          Francisco.
+          More tools coming soon — built in San Francisco for anyone who wants
+          clarity about their money.
         </p>
       </section>
     </div>

@@ -1,8 +1,8 @@
-# FinCalcHub
+# TheFinanceBeacon
 
-Free personal finance calculators. Built for real life.
+Your money, clearly calculated.
 
-FinCalcHub is a pure client-side tool site — no accounts, no database, no
+TheFinanceBeacon is a pure client-side tool site — no accounts, no database, no
 backend. Every calculation runs in the browser; your numbers never leave your
 device.
 
@@ -19,7 +19,7 @@ device.
 
 - **Debt Payoff Calculator** — compare the avalanche vs snowball methods, see
   your debt-free date, total interest, and a payoff schedule.
-- **Paycheck Calculator** — estimate take-home pay after federal tax (2024
+- **Paycheck Calculator** — estimate take-home pay after federal tax (2026
   brackets), state tax, and FICA, with 401(k) and pre-tax deductions.
 
 ## Getting started
@@ -76,6 +76,6 @@ types/                   Shared TypeScript types
 
 ## Notes
 
-- Tax figures use 2024 federal brackets and flat state income-tax rates; results
+- Tax figures use 2026 federal brackets and flat state income-tax rates; results
   are estimates, not tax advice.
 - All charts are pure CSS (no chart libraries).

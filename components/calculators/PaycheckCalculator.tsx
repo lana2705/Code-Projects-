@@ -39,13 +39,19 @@ export default function PaycheckCalculator() {
   const [healthInsurance, setHealthInsurance] = useState('')
   const [additionalWithholding, setAdditionalWithholding] = useState('')
 
-  const [errors, setErrors] = useState<{ grossSalary?: string; state?: string }>(
-    {},
-  )
+  const [errors, setErrors] = useState<{
+    grossSalary?: string
+    state?: string
+    retirement401k?: string
+  }>({})
   const [result, setResult] = useState<PaycheckResult | null>(null)
 
   const handleCalculate = () => {
-    const nextErrors: { grossSalary?: string; state?: string } = {}
+    const nextErrors: {
+      grossSalary?: string
+      state?: string
+      retirement401k?: string
+    } = {}
     const gross = parseCurrencyInput(grossSalary)
     if (!grossSalary.trim() || isNaN(gross) || gross <= 0) {
       nextErrors.grossSalary = 'Enter a gross salary greater than 0'
@@ -53,16 +59,17 @@ export default function PaycheckCalculator() {
     if (!state) {
       nextErrors.state = 'Select a state'
     }
+    // 401(k) is a percentage of gross pay — reject anything outside 0–100.
+    if (retirement401k.trim() !== '') {
+      const pct = parseFloat(retirement401k)
+      if (isNaN(pct) || pct < 0 || pct > 100) {
+        nextErrors.retirement401k = 'Enter a percentage from 0 to 100'
+      }
+    }
     setErrors(nextErrors)
     if (Object.keys(nextErrors).length > 0) {
       setResult(null)
       return
-    }
-
-    const clamp = (v: string, min: number, max: number) => {
-      const n = parseFloat(v)
-      if (isNaN(n)) return 0
-      return Math.min(Math.max(n, min), max)
     }
 
     setResult(
@@ -71,7 +78,10 @@ export default function PaycheckCalculator() {
         payFrequency,
         filingStatus,
         state,
-        retirement401kPercent: clamp(retirement401k, 0, 100),
+        retirement401kPercent: Math.min(
+          Math.max(parseFloat(retirement401k) || 0, 0),
+          100,
+        ),
         healthInsurancePerPeriod: Math.max(
           0,
           parseCurrencyInput(healthInsurance) || 0,
@@ -156,15 +166,28 @@ export default function PaycheckCalculator() {
 
           <div>
             <label className={labelClass}>401(k) contribution %</label>
-            <input
-              type="number"
-              inputMode="decimal"
-              aria-label="401(k) contribution percent"
-              placeholder="0"
-              value={retirement401k}
-              onChange={(e) => setRetirement401k(e.target.value)}
-              className={inputClass}
-            />
+            <div className="relative">
+              <input
+                type="number"
+                inputMode="decimal"
+                aria-label="401(k) contribution percent"
+                placeholder="e.g. 5"
+                value={retirement401k}
+                onChange={(e) => setRetirement401k(e.target.value)}
+                className={`${inputClass} pr-8`}
+              />
+              <span className="pointer-events-none absolute right-4 top-1/2 -translate-y-1/2 text-muted">
+                %
+              </span>
+            </div>
+            <p className="mt-1 text-xs text-muted">
+              Percent of your gross pay (not a dollar amount).
+            </p>
+            {errors.retirement401k && (
+              <p className="mt-1 text-xs text-error">
+                {errors.retirement401k}
+              </p>
+            )}
           </div>
           <div>
             <label className={labelClass}>Health insurance / paycheck</label>

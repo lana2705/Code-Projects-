@@ -1,6 +1,6 @@
-export const SITE_NAME = 'FinCalcHub'
+export const SITE_NAME = 'TheFinanceBeacon'
 
-export const SITE_TAGLINE = 'Free Finance Calculators. Built for Real Life.'
+export const SITE_TAGLINE = 'Your Money, Clearly Calculated.'
 
 export const ETSY_STORE_URL = process.env.NEXT_PUBLIC_ETSY_STORE_URL ?? ''
 

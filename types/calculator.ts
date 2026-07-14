@@ -54,6 +54,7 @@ export interface PaycheckResult {
   socialSecurity: number // per period
   medicare: number // per period
   retirement401k: number // per period
+  retirement401kCapped: boolean // true if capped at the IRS annual limit
   healthInsurance: number // per period
   additionalWithholding: number // per period
   netPerPeriod: number

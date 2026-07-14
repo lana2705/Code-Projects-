@@ -211,7 +211,7 @@ export default function PaycheckResultsPanel({
 
       {/* Disclaimer */}
       <p className="mt-6 text-[13px] italic text-muted">
-        This is an estimate based on 2024 federal tax brackets and flat state
+        This is an estimate based on 2026 federal tax brackets and flat state
         income tax rates. Actual withholding may differ based on your W-4
         elections, deductions, and credits. Consult a tax professional for
         precise figures.

@@ -5,7 +5,8 @@ import AdSenseSlot from '@/components/shared/AdSenseSlot'
 import FAQAccordion, { type FAQItem } from '@/components/shared/FAQAccordion'
 import { SITE_NAME, SITE_URL } from '@/lib/constants'
 
-const TITLE = 'Paycheck Calculator — Calculate Your Take-Home Pay | FinCalcHub'
+const TITLE =
+  'Paycheck Calculator — Calculate Your Take-Home Pay | TheFinanceBeacon'
 const DESCRIPTION =
   'Free paycheck calculator. Enter your salary, state, and deductions to see exactly what hits your bank account after federal tax, state tax, and FICA.'
 const URL = `${SITE_URL}/paycheck-calculator`
@@ -42,7 +43,7 @@ const paycheckFAQs: FAQItem[] = [
   {
     question: 'Why is my take-home pay different from this estimate?',
     answer:
-      'Several factors can cause differences: your W-4 elections, employer-specific benefits, local taxes (city or county), union dues, or garnishments. This calculator uses standard assumptions — your HR department or pay stub will have the exact figures.',
+      'Several factors can cause differences: your W-4 elections, employer-specific benefits, local taxes (city or county), union dues, or garnishments. This calculator uses standard assumptions — your HR department or pay stub will have the exact figures. Additionally, this calculator uses flat state income tax estimates — actual state tax calculations use progressive brackets in most states, so your real state tax may differ somewhat from what\'s shown here.',
   },
   {
     question: "What's the difference between gross and net pay?",
@@ -85,9 +86,11 @@ export default function PaycheckPage() {
 
       <h1 className="text-4xl font-bold text-navy">Paycheck Calculator</h1>
       <p className="mt-4 text-lg text-muted">
-        Find out exactly what hits your bank account after federal taxes, state
-        taxes, Social Security, Medicare, and your personal deductions. Enter
-        your gross salary below.
+        Enter your gross salary, state, and deductions to see an estimated
+        breakdown of your take-home pay after federal taxes, state taxes, Social
+        Security, and Medicare. Results are estimates based on 2026 tax
+        brackets — your actual paycheck may vary based on your W-4 elections and
+        employer-specific deductions.
       </p>
 
       <div className="mt-8">
