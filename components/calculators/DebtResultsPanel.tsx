@@ -8,7 +8,7 @@ import {
   recommendFirstDebt,
   formatMonths,
 } from '@/lib/calculators/debtPayoff'
-import { formatCurrency, formatMonthYear, formatShortDate } from '@/lib/format'
+import { formatCurrency, formatShortDate } from '@/lib/format'
 
 const DEBT_COLORS = [
   '#1B2E5E',
@@ -111,7 +111,7 @@ export default function DebtResultsPanel({
             <dd className="font-medium text-navy">
               {result.cappedOut
                 ? '50+ years'
-                : formatMonthYear(result.payoffDate)}
+                : formatShortDate(result.payoffDate)}
             </dd>
           </div>
           <div className="flex justify-between">
@@ -156,9 +156,11 @@ export default function DebtResultsPanel({
       {/* Summary cards */}
       <div className="grid gap-4 sm:grid-cols-3">
         <div className="rounded-card border border-border bg-surface p-5">
-          <p className="text-sm text-muted">You&apos;ll be debt-free</p>
+          <p className="text-xs font-medium uppercase tracking-wide text-muted">
+            You&apos;ll be debt-free
+          </p>
           <p className="mt-2 text-2xl font-bold text-navy">
-            {best.cappedOut ? '50+ years' : formatMonthYear(best.payoffDate)}
+            {best.cappedOut ? '50+ years' : formatShortDate(best.payoffDate)}
           </p>
           <p className="mt-1 text-xs text-muted">
             {best.cappedOut
@@ -169,13 +171,17 @@ export default function DebtResultsPanel({
           </p>
         </div>
         <div className="rounded-card border border-border bg-surface p-5">
-          <p className="text-sm text-muted">Total interest paid</p>
+          <p className="text-xs font-medium uppercase tracking-wide text-muted">
+            Total interest paid
+          </p>
           <p className="mt-2 text-2xl font-bold text-navy">
             {formatCurrency(best.totalInterestPaid)}
           </p>
         </div>
         <div className="rounded-card border border-border bg-surface p-5">
-          <p className="text-sm text-muted">Total amount paid</p>
+          <p className="text-xs font-medium uppercase tracking-wide text-muted">
+            Total amount paid
+          </p>
           <p className="mt-2 text-2xl font-bold text-navy">
             {formatCurrency(best.totalAmountPaid)}
           </p>

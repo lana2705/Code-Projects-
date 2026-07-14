@@ -1,6 +1,6 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
-import { TrendingDown, Wallet, Check } from 'lucide-react'
+import { TrendingDown, Wallet, Check, Rocket } from 'lucide-react'
 import { SITE_NAME, SITE_URL } from '@/lib/constants'
 
 export const metadata: Metadata = {
@@ -53,32 +53,18 @@ export default function HomePage() {
       />
 
       {/* Hero */}
-      <section className="py-16 text-center sm:py-24">
+      <section className="pt-16 text-center sm:pt-24">
         <h1 className="mx-auto max-w-3xl text-balance text-4xl font-bold leading-tight text-navy sm:text-[44px]">
           Your Money, Clearly Calculated.
         </h1>
         <p className="mx-auto mt-5 max-w-2xl text-balance text-lg text-muted">
-          Free tools that show you exactly where your paycheck goes — and
-          exactly how fast you can get out of debt.
+          Simple financial calculators that help you make better money
+          decisions.
         </p>
-        <div className="mt-8 flex flex-col items-center justify-center gap-4 sm:flex-row">
-          <Link
-            href="/paycheck-calculator"
-            className="w-full rounded-btn bg-navy px-6 py-3 font-semibold text-white transition-colors hover:bg-[#16264d] sm:w-auto"
-          >
-            Paycheck Calculator →
-          </Link>
-          <Link
-            href="/debt-payoff-calculator"
-            className="w-full rounded-btn border border-navy px-6 py-3 font-semibold text-navy transition-colors hover:bg-navy hover:text-white sm:w-auto"
-          >
-            Debt Payoff Calculator →
-          </Link>
-        </div>
       </section>
 
       {/* Trust bar */}
-      <section className="pb-4">
+      <section className="pb-4 pt-10">
         <div className="mx-auto flex max-w-2xl flex-col items-center justify-center gap-4 sm:flex-row sm:gap-10">
           {TRUST_ITEMS.map((item) => (
             <span
@@ -120,11 +106,16 @@ export default function HomePage() {
       </section>
 
       {/* Footer note */}
-      <section className="pb-16 text-center">
-        <p className="text-sm text-muted">
-          More tools coming soon — built in San Francisco for anyone who wants
-          clarity about their money.
-        </p>
+      <section className="pb-16">
+        <div className="mx-auto flex max-w-xl items-center justify-center gap-3 text-center">
+          <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-navy/5 text-navy">
+            <Rocket size={16} />
+          </span>
+          <p className="text-sm text-muted">
+            More tools coming soon — built in San Francisco for anyone who wants
+            clarity about their money.
+          </p>
+        </div>
       </section>
     </div>
   )
