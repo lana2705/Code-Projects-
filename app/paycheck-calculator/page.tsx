@@ -33,7 +33,7 @@ const paycheckFAQs: FAQItem[] = [
   {
     question: 'What is FICA tax?',
     answer:
-      'FICA stands for Federal Insurance Contributions Act. It covers two taxes: Social Security (6.2% on wages up to $168,600) and Medicare (1.45% on all wages). Your employer matches these amounts, but you only see your half on your pay stub.',
+      'FICA stands for Federal Insurance Contributions Act. It covers two taxes: Social Security (6.2% on wages up to $184,500) and Medicare (1.45% on all wages). Your employer matches these amounts, but you only see your half on your pay stub.',
   },
   {
     question: 'How do I increase my take-home pay?',

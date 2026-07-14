@@ -68,11 +68,11 @@ const PAY_PERIODS: Record<PayFrequency, number> = {
   weekly: 52,
 }
 
-// Employee 401(k) elective-deferral limit (under age 50).
-const RETIREMENT_401K_LIMIT = 23000
+// 2026 employee 401(k) elective-deferral limit (under age 50).
+const RETIREMENT_401K_LIMIT = 24500
 
-// FICA constants. Social Security wage base and Medicare thresholds.
-const SS_WAGE_BASE = 168600
+// FICA constants (2026). Social Security wage base and Medicare thresholds.
+const SS_WAGE_BASE = 184500
 const SS_RATE = 0.062
 const MEDICARE_RATE = 0.0145
 const ADDL_MEDICARE_RATE = 0.009
