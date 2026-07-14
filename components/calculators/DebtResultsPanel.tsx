@@ -41,9 +41,13 @@ export default function DebtResultsPanel({
   debts,
 }: DebtResultsPanelProps) {
   const { avalanche, snowball, bestMethod, interestSaved } = comparison
-  const best = bestMethod === 'avalanche' ? avalanche : snowball
-
   const [scheduleOpen, setScheduleOpen] = useState(false)
+  // The method whose plan (summary, payoff sequence, schedule) is shown.
+  // Clicking a comparison card selects it; defaults to the best method.
+  const [selectedMethod, setSelectedMethod] = useState<
+    'avalanche' | 'snowball'
+  >(bestMethod)
+  const selectedResult = selectedMethod === 'avalanche' ? avalanche : snowball
 
   const recommendation = useMemo(() => recommendFirstDebt(debts), [debts])
 
@@ -55,32 +59,34 @@ export default function DebtResultsPanel({
     return map
   }, [debts])
 
-  // Bar chart + schedule are based on the best (lowest-interest) method.
+  // Bar chart + schedule follow the currently selected method.
   const paidOffMonths = useMemo(() => {
     const set = new Set<number>()
-    Object.values(payoffMonthByDebt(best)).forEach((m) => set.add(m))
+    Object.values(payoffMonthByDebt(selectedResult)).forEach((m) => set.add(m))
     return set
-  }, [best])
+  }, [selectedResult])
 
   const barData = useMemo(() => {
-    const payoff = payoffMonthByDebt(best)
-    const maxMonth = Math.max(1, best.monthsToPayoff)
+    const payoff = payoffMonthByDebt(selectedResult)
+    const maxMonth = Math.max(1, selectedResult.monthsToPayoff)
     return debts.map((d) => ({
       name: d.name,
-      month: payoff[d.name] ?? best.monthsToPayoff,
-      pct: ((payoff[d.name] ?? best.monthsToPayoff) / maxMonth) * 100,
+      month: payoff[d.name] ?? selectedResult.monthsToPayoff,
+      pct: ((payoff[d.name] ?? selectedResult.monthsToPayoff) / maxMonth) * 100,
       color: colorByDebt[d.name],
     }))
-  }, [best, debts, colorByDebt])
+  }, [selectedResult, debts, colorByDebt])
 
   const MethodPanel = ({
     result,
+    methodKey,
     label,
     description,
     other,
     otherLabel,
   }: {
     result: PayoffResult
+    methodKey: 'avalanche' | 'snowball'
     label: string
     description: string
     other: PayoffResult
@@ -90,10 +96,16 @@ export default function DebtResultsPanel({
     const savedAmount = Math.round(
       other.totalInterestPaid - result.totalInterestPaid,
     )
+    const selected = selectedMethod === methodKey
     return (
-      <div
-        className={`rounded-card border p-4 ${
-          saves ? 'border-2 border-accent bg-accent/5' : 'border-border bg-white'
+      <button
+        type="button"
+        onClick={() => setSelectedMethod(methodKey)}
+        aria-pressed={selected}
+        className={`rounded-card border p-4 text-left transition-all hover:border-navy focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-navy focus-visible:ring-offset-2 ${
+          selected
+            ? 'border-2 border-navy bg-navy/[0.03] ring-1 ring-navy'
+            : 'border-border bg-white'
         }`}
       >
         <div className="flex items-center gap-2">
@@ -101,6 +113,11 @@ export default function DebtResultsPanel({
           {saves && (
             <span className="rounded-full bg-accent px-2 py-0.5 text-[10px] font-semibold text-white">
               Saves more money
+            </span>
+          )}
+          {selected && (
+            <span className="ml-auto text-[11px] font-semibold text-navy">
+              Viewing ↓
             </span>
           )}
         </div>
@@ -134,7 +151,7 @@ export default function DebtResultsPanel({
             ✓ Saves {formatCurrency(savedAmount)} vs {otherLabel}
           </p>
         )}
-      </div>
+      </button>
     )
   }
 
@@ -160,13 +177,15 @@ export default function DebtResultsPanel({
             You&apos;ll be debt-free
           </p>
           <p className="mt-2 text-2xl font-bold text-navy">
-            {best.cappedOut ? '50+ years' : formatShortDate(best.payoffDate)}
+            {selectedResult.cappedOut
+              ? '50+ years'
+              : formatShortDate(selectedResult.payoffDate)}
           </p>
           <p className="mt-1 text-xs text-muted">
-            {best.cappedOut
+            {selectedResult.cappedOut
               ? ''
-              : `${best.monthsToPayoff} months · ${formatMonths(
-                  best.monthsToPayoff,
+              : `${selectedResult.monthsToPayoff} months · ${formatMonths(
+                  selectedResult.monthsToPayoff,
                 )}`}
           </p>
         </div>
@@ -175,7 +194,7 @@ export default function DebtResultsPanel({
             Total interest paid
           </p>
           <p className="mt-2 text-2xl font-bold text-navy">
-            {formatCurrency(best.totalInterestPaid)}
+            {formatCurrency(selectedResult.totalInterestPaid)}
           </p>
         </div>
         <div className="rounded-card border border-border bg-surface p-5">
@@ -183,19 +202,21 @@ export default function DebtResultsPanel({
             Total amount paid
           </p>
           <p className="mt-2 text-2xl font-bold text-navy">
-            {formatCurrency(best.totalAmountPaid)}
+            {formatCurrency(selectedResult.totalAmountPaid)}
           </p>
         </div>
       </div>
 
       {/* Avalanche vs Snowball comparison */}
       <div className="mt-8">
-        <h3 className="mb-3 text-lg font-semibold text-navy">
-          Avalanche vs snowball
-        </h3>
+        <h3 className="text-lg font-semibold text-navy">Avalanche vs snowball</h3>
+        <p className="mb-3 text-sm text-muted">
+          Select a method to view its payment plan below.
+        </p>
         <div className="grid gap-4 sm:grid-cols-2">
           <MethodPanel
             result={avalanche}
+            methodKey="avalanche"
             other={snowball}
             otherLabel="snowball"
             label="Avalanche"
@@ -203,6 +224,7 @@ export default function DebtResultsPanel({
           />
           <MethodPanel
             result={snowball}
+            methodKey="snowball"
             other={avalanche}
             otherLabel="avalanche"
             label="Snowball"
@@ -229,7 +251,7 @@ export default function DebtResultsPanel({
           aria-expanded={scheduleOpen}
           className="flex w-full items-center justify-center gap-2 rounded-btn border border-border bg-surface py-2.5 text-sm font-medium text-muted transition-colors hover:text-navy"
         >
-          {scheduleOpen ? 'Hide' : 'Show'} payment schedule
+          {scheduleOpen ? 'Hide' : 'Show'} {selectedMethod} payment schedule
           <ChevronDown
             size={16}
             className={`transition-transform ${scheduleOpen ? 'rotate-180' : ''}`}
@@ -244,7 +266,7 @@ export default function DebtResultsPanel({
                 Payoff sequence
               </h3>
               <p className="mb-4 text-sm text-muted">
-                When each debt is cleared using the {bestMethod} method.
+                When each debt is cleared using the {selectedMethod} method.
               </p>
               <div className="space-y-3">
                 {barData.map((bar) => (
@@ -283,7 +305,7 @@ export default function DebtResultsPanel({
               </div>
             </div>
 
-            {/* Schedule table (best method) */}
+            {/* Schedule table (selected method) */}
             <div className="max-h-[420px] overflow-auto rounded-card border border-border">
               <table className="w-full text-left text-sm">
                 <thead className="sticky top-0 bg-surface text-muted">
@@ -299,7 +321,7 @@ export default function DebtResultsPanel({
                   </tr>
                 </thead>
                 <tbody>
-                  {best.monthlySchedule.map((m) => {
+                  {selectedResult.monthlySchedule.map((m) => {
                     const highlight = paidOffMonths.has(m.month)
                     return (
                       <tr
