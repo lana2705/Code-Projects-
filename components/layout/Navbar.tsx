@@ -7,8 +7,8 @@ import { Menu, X, ChevronDown } from 'lucide-react'
 import { SITE_NAME } from '@/lib/constants'
 
 const CALCULATORS = [
-  { name: 'Debt Payoff Calculator', href: '/debt-payoff-calculator' },
   { name: 'Paycheck Calculator', href: '/paycheck-calculator' },
+  { name: 'Debt Payoff Calculator', href: '/debt-payoff-calculator' },
 ]
 
 export default function Navbar() {

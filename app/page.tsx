@@ -1,6 +1,6 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
-import { TrendingDown, Wallet } from 'lucide-react'
+import { TrendingDown, Wallet, Check } from 'lucide-react'
 import { SITE_NAME, SITE_URL } from '@/lib/constants'
 
 export const metadata: Metadata = {
@@ -29,18 +29,20 @@ const organizationSchema = {
 
 const TOOLS = [
   {
-    icon: TrendingDown,
-    name: 'Debt Payoff Calculator',
-    description: 'See your debt-free date and compare payoff strategies.',
-    href: '/debt-payoff-calculator',
-  },
-  {
     icon: Wallet,
     name: 'Paycheck Calculator',
     description: 'Find out exactly what hits your bank account after taxes.',
     href: '/paycheck-calculator',
   },
+  {
+    icon: TrendingDown,
+    name: 'Debt Payoff Calculator',
+    description: 'See your debt-free date and compare payoff strategies.',
+    href: '/debt-payoff-calculator',
+  },
 ]
+
+const TRUST_ITEMS = ['Free to use', 'No signup required', 'No data stored']
 
 export default function HomePage() {
   return (
@@ -61,28 +63,34 @@ export default function HomePage() {
         </p>
         <div className="mt-8 flex flex-col items-center justify-center gap-4 sm:flex-row">
           <Link
-            href="/debt-payoff-calculator"
+            href="/paycheck-calculator"
             className="w-full rounded-btn bg-navy px-6 py-3 font-semibold text-white transition-colors hover:bg-[#16264d] sm:w-auto"
           >
-            Debt Payoff Calculator →
+            Paycheck Calculator →
           </Link>
           <Link
-            href="/paycheck-calculator"
+            href="/debt-payoff-calculator"
             className="w-full rounded-btn border border-navy px-6 py-3 font-semibold text-navy transition-colors hover:bg-navy hover:text-white sm:w-auto"
           >
-            Paycheck Calculator →
+            Debt Payoff Calculator →
           </Link>
         </div>
       </section>
 
       {/* Trust bar */}
-      <section className="border-y border-border py-5">
-        <div className="flex flex-wrap items-center justify-center gap-x-8 gap-y-2 text-sm font-medium text-muted">
-          <span>Free to use</span>
-          <span aria-hidden="true">·</span>
-          <span>No signup required</span>
-          <span aria-hidden="true">·</span>
-          <span>No data stored</span>
+      <section className="pb-4">
+        <div className="mx-auto flex max-w-2xl flex-col items-center justify-center gap-4 sm:flex-row sm:gap-10">
+          {TRUST_ITEMS.map((item) => (
+            <span
+              key={item}
+              className="flex items-center gap-2 text-sm font-medium text-navy"
+            >
+              <span className="flex h-5 w-5 items-center justify-center rounded-full bg-accent/10 text-accent">
+                <Check size={13} strokeWidth={3} />
+              </span>
+              {item}
+            </span>
+          ))}
         </div>
       </section>
 

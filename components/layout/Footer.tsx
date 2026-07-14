@@ -3,8 +3,8 @@ import { SITE_NAME } from '@/lib/constants'
 
 const LINKS = [
   { name: 'Home', href: '/' },
-  { name: 'Debt Payoff Calculator', href: '/debt-payoff-calculator' },
   { name: 'Paycheck Calculator', href: '/paycheck-calculator' },
+  { name: 'Debt Payoff Calculator', href: '/debt-payoff-calculator' },
   { name: 'About', href: '/about' },
   { name: 'Contact', href: '/contact' },
   { name: 'Privacy Policy', href: '/privacy-policy' },
