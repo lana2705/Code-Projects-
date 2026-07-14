@@ -49,10 +49,12 @@ export default function DebtResultsPanel({
 
   const [view, setView] = useState<'strategy' | 'combined'>('strategy')
   const [scheduleOpen, setScheduleOpen] = useState(false)
-  const [scheduleTab, setScheduleTab] = useState<'avalanche' | 'snowball'>(
-    'avalanche',
-  )
+  const [selectedMethod, setSelectedMethod] = useState<
+    'avalanche' | 'snowball'
+  >(bestMethod)
   const [openDebtId, setOpenDebtId] = useState<string | null>(null)
+
+  const selectedResult = selectedMethod === 'avalanche' ? avalanche : snowball
 
   const combined = useMemo(
     () => calculateCombined(debts, extraPayment),
@@ -72,24 +74,22 @@ export default function DebtResultsPanel({
     return map
   }, [debts])
 
-  const activeSchedule = scheduleTab === 'avalanche' ? avalanche : snowball
-
   const paidOffMonths = useMemo(() => {
     const set = new Set<number>()
-    Object.values(payoffMonthByDebt(activeSchedule)).forEach((m) => set.add(m))
+    Object.values(payoffMonthByDebt(selectedResult)).forEach((m) => set.add(m))
     return set
-  }, [activeSchedule])
+  }, [selectedResult])
 
   const barData = useMemo(() => {
-    const payoff = payoffMonthByDebt(best)
-    const maxMonth = Math.max(1, best.monthsToPayoff)
+    const payoff = payoffMonthByDebt(selectedResult)
+    const maxMonth = Math.max(1, selectedResult.monthsToPayoff)
     return debts.map((d) => ({
       name: d.name,
-      month: payoff[d.name] ?? best.monthsToPayoff,
-      pct: ((payoff[d.name] ?? best.monthsToPayoff) / maxMonth) * 100,
+      month: payoff[d.name] ?? selectedResult.monthsToPayoff,
+      pct: ((payoff[d.name] ?? selectedResult.monthsToPayoff) / maxMonth) * 100,
       color: colorByDebt[d.name],
     }))
-  }, [best, debts, colorByDebt])
+  }, [selectedResult, debts, colorByDebt])
 
   const MethodPanel = ({
     result,
@@ -267,13 +267,56 @@ export default function DebtResultsPanel({
             )}
           </div>
 
+          {/* Method selector — pick a strategy to view its full payment plan */}
+          <div className="mt-8">
+            <p className="mb-2 text-sm font-semibold text-navy">
+              View the payment plan for:
+            </p>
+            <div className="inline-flex rounded-btn border border-border p-1">
+              {(
+                [
+                  ['avalanche', 'Avalanche'],
+                  ['snowball', 'Snowball'],
+                ] as const
+              ).map(([key, label]) => (
+                <button
+                  key={key}
+                  type="button"
+                  onClick={() => setSelectedMethod(key)}
+                  className={`rounded-[4px] px-4 py-1.5 text-sm font-semibold transition-colors ${
+                    selectedMethod === key
+                      ? 'bg-navy text-white'
+                      : 'text-muted hover:text-navy'
+                  }`}
+                >
+                  {label}
+                  {key === bestMethod && interestSaved > 0.5 ? ' ★' : ''}
+                </button>
+              ))}
+            </div>
+            <p className="mt-2 text-sm text-muted">
+              <span className="capitalize">{selectedMethod}</span>:{' '}
+              debt-free by{' '}
+              <strong className="text-navy">
+                {selectedResult.cappedOut
+                  ? '50+ years'
+                  : formatMonthYear(selectedResult.payoffDate)}
+              </strong>{' '}
+              ({selectedResult.monthsToPayoff} months) ·{' '}
+              <strong className="text-navy">
+                {formatCurrency(selectedResult.totalInterestPaid)}
+              </strong>{' '}
+              interest
+            </p>
+          </div>
+
           {/* Bar chart */}
-          <div className="mt-8 rounded-card border border-border bg-white p-5">
+          <div className="mt-6 rounded-card border border-border bg-white p-5">
             <h3 className="mb-1 text-xl font-semibold text-navy">
               Payoff sequence
             </h3>
             <p className="mb-4 text-sm text-muted">
-              When each debt is cleared using the {bestMethod} method.
+              When each debt is cleared using the {selectedMethod} method.
             </p>
             <div className="space-y-3">
               {barData.map((bar) => (
@@ -320,27 +363,11 @@ export default function DebtResultsPanel({
               className="rounded-btn border border-navy px-4 py-2 text-sm font-semibold text-navy transition-colors hover:bg-navy hover:text-white"
               aria-expanded={scheduleOpen}
             >
-              {scheduleOpen ? 'Hide' : 'Show'} payment schedule
+              {scheduleOpen ? 'Hide' : 'Show'} {selectedMethod} payment schedule
             </button>
 
             {scheduleOpen && (
               <div className="mt-4">
-                <div className="mb-3 flex gap-2">
-                  {(['avalanche', 'snowball'] as const).map((tab) => (
-                    <button
-                      key={tab}
-                      type="button"
-                      onClick={() => setScheduleTab(tab)}
-                      className={`rounded-btn px-4 py-2 text-sm font-semibold capitalize transition-colors ${
-                        scheduleTab === tab
-                          ? 'bg-navy text-white'
-                          : 'border border-border text-muted hover:text-navy'
-                      }`}
-                    >
-                      {tab}
-                    </button>
-                  ))}
-                </div>
                 <div className="max-h-[420px] overflow-auto rounded-card border border-border">
                   <table className="w-full text-left text-sm">
                     <thead className="sticky top-0 bg-surface text-muted">
@@ -356,7 +383,7 @@ export default function DebtResultsPanel({
                       </tr>
                     </thead>
                     <tbody>
-                      {activeSchedule.monthlySchedule.map((m) => {
+                      {selectedResult.monthlySchedule.map((m) => {
                         const highlight = paidOffMonths.has(m.month)
                         return (
                           <tr

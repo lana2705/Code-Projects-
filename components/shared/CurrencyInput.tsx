@@ -9,13 +9,15 @@ interface CurrencyInputProps {
   className?: string
   id?: string
   'aria-label'?: string
+  /** Show a leading "$" adornment; the value then formats without a "$". */
+  prefix?: boolean
 }
 
 /**
- * A dollar-amount text input that formats its value as currency ("$1,234.50")
- * when the field loses focus, and reverts to a plain, easily editable number
- * while focused. The raw string is reported to the parent via onChange; parse
- * with parseCurrencyInput when reading it back.
+ * A dollar-amount text input that formats its value as currency when the field
+ * loses focus, and reverts to a plain, easily editable number while focused.
+ * The raw string is reported to the parent via onChange; parse with
+ * parseCurrencyInput when reading it back.
  */
 export default function CurrencyInput({
   value,
@@ -24,8 +26,9 @@ export default function CurrencyInput({
   className,
   id,
   'aria-label': ariaLabel,
+  prefix = false,
 }: CurrencyInputProps) {
-  return (
+  const input = (
     <input
       id={id}
       type="text"
@@ -33,7 +36,7 @@ export default function CurrencyInput({
       aria-label={ariaLabel}
       placeholder={placeholder}
       value={value}
-      className={className}
+      className={prefix ? `${className ?? ''} pl-7` : className}
       onChange={(e) => onChange(e.target.value)}
       onFocus={() => {
         // Strip formatting so the raw number is easy to edit.
@@ -43,8 +46,19 @@ export default function CurrencyInput({
       onBlur={() => {
         // Format as a monetary value on blur.
         if (value.trim() === '') return
-        onChange(formatCurrencyInput(value))
+        onChange(formatCurrencyInput(value, !prefix))
       }}
     />
+  )
+
+  if (!prefix) return input
+
+  return (
+    <div className="relative">
+      <span className="pointer-events-none absolute left-3 top-1/2 -translate-y-1/2 text-muted">
+        $
+      </span>
+      {input}
+    </div>
   )
 }

@@ -27,8 +27,8 @@ const FILING_STATUSES: { value: FilingStatus; label: string }[] = [
 ]
 
 const inputClass =
-  'w-full rounded-input border border-border px-3 py-2 text-sm outline-none focus:border-navy focus:ring-1 focus:ring-navy'
-const labelClass = 'mb-1 block text-sm font-medium text-navy'
+  'w-full rounded-lg border border-border bg-white px-4 py-3 text-base outline-none focus:border-navy focus:ring-1 focus:ring-navy'
+const labelClass = 'mb-2 block text-base font-semibold text-navy'
 
 export default function PaycheckCalculator() {
   const [grossSalary, setGrossSalary] = useState('')
@@ -87,119 +87,109 @@ export default function PaycheckCalculator() {
   return (
     <div>
       <div className="rounded-card border border-border bg-surface p-5 sm:p-6">
-        <div className="grid gap-8 md:grid-cols-2">
-          {/* Column 1: Income */}
-          <div className="space-y-4">
-            <h3 className="text-lg font-semibold text-navy">Income</h3>
-            <div>
-              <label className={labelClass}>Annual gross salary</label>
-              <CurrencyInput
-                aria-label="Annual gross salary"
-                placeholder="$60,000.00"
-                value={grossSalary}
-                onChange={setGrossSalary}
-                className={inputClass}
-              />
-              {errors.grossSalary && (
-                <p className="mt-1 text-xs text-error">{errors.grossSalary}</p>
-              )}
-            </div>
-            <div>
-              <label className={labelClass}>Pay frequency</label>
-              <p className="sr-only">How often you are paid</p>
-              <select
-                value={payFrequency}
-                onChange={(e) =>
-                  setPayFrequency(e.target.value as PayFrequency)
-                }
-                className={inputClass}
-              >
-                {FREQUENCIES.map((f) => (
-                  <option key={f.value} value={f.value}>
-                    {f.label}
-                  </option>
-                ))}
-              </select>
-            </div>
-            <div>
-              <label className={labelClass}>Filing status</label>
-              <select
-                value={filingStatus}
-                onChange={(e) =>
-                  setFilingStatus(e.target.value as FilingStatus)
-                }
-                className={inputClass}
-              >
-                {FILING_STATUSES.map((f) => (
-                  <option key={f.value} value={f.value}>
-                    {f.label}
-                  </option>
-                ))}
-              </select>
-            </div>
-            <div>
-              <label className={labelClass}>State</label>
-              <select
-                value={state}
-                onChange={(e) => setState(e.target.value)}
-                className={inputClass}
-              >
-                <option value="">Select a state…</option>
-                {STATES_ALPHABETICAL.map((s) => (
-                  <option key={s.code} value={s.code}>
-                    {s.name}
-                  </option>
-                ))}
-              </select>
-              {errors.state && (
-                <p className="mt-1 text-xs text-error">{errors.state}</p>
-              )}
-            </div>
+        {/* Fields flow left-to-right across a two-column grid. */}
+        <div className="grid gap-x-6 gap-y-5 sm:grid-cols-2">
+          <div>
+            <label className={labelClass}>Gross salary (annual)</label>
+            <CurrencyInput
+              prefix
+              aria-label="Gross salary (annual)"
+              placeholder="85,000"
+              value={grossSalary}
+              onChange={setGrossSalary}
+              className={inputClass}
+            />
+            {errors.grossSalary && (
+              <p className="mt-1 text-xs text-error">{errors.grossSalary}</p>
+            )}
+          </div>
+          <div>
+            <label className={labelClass}>Pay frequency</label>
+            <select
+              aria-label="Pay frequency"
+              value={payFrequency}
+              onChange={(e) => setPayFrequency(e.target.value as PayFrequency)}
+              className={inputClass}
+            >
+              {FREQUENCIES.map((f) => (
+                <option key={f.value} value={f.value}>
+                  {f.label}
+                </option>
+              ))}
+            </select>
           </div>
 
-          {/* Column 2: Deductions */}
-          <div className="space-y-4">
-            <h3 className="text-lg font-semibold text-navy">
-              Deductions{' '}
-              <span className="text-sm font-normal text-muted">
-                (optional)
-              </span>
-            </h3>
-            <div>
-              <label className={labelClass}>401(k) contribution %</label>
-              <input
-                type="number"
-                inputMode="decimal"
-                placeholder="0"
-                value={retirement401k}
-                onChange={(e) => setRetirement401k(e.target.value)}
-                className={inputClass}
-              />
-            </div>
-            <div>
-              <label className={labelClass}>
-                Health insurance premium per paycheck
-              </label>
-              <CurrencyInput
-                aria-label="Health insurance premium per paycheck"
-                placeholder="$0.00"
-                value={healthInsurance}
-                onChange={setHealthInsurance}
-                className={inputClass}
-              />
-            </div>
-            <div>
-              <label className={labelClass}>
-                Additional federal withholding per paycheck
-              </label>
-              <CurrencyInput
-                aria-label="Additional federal withholding per paycheck"
-                placeholder="$0.00"
-                value={additionalWithholding}
-                onChange={setAdditionalWithholding}
-                className={inputClass}
-              />
-            </div>
+          <div>
+            <label className={labelClass}>Filing status</label>
+            <select
+              aria-label="Filing status"
+              value={filingStatus}
+              onChange={(e) => setFilingStatus(e.target.value as FilingStatus)}
+              className={inputClass}
+            >
+              {FILING_STATUSES.map((f) => (
+                <option key={f.value} value={f.value}>
+                  {f.label}
+                </option>
+              ))}
+            </select>
+          </div>
+          <div>
+            <label className={labelClass}>State</label>
+            <select
+              aria-label="State"
+              value={state}
+              onChange={(e) => setState(e.target.value)}
+              className={inputClass}
+            >
+              <option value="">Select a state…</option>
+              {STATES_ALPHABETICAL.map((s) => (
+                <option key={s.code} value={s.code}>
+                  {s.name}
+                </option>
+              ))}
+            </select>
+            {errors.state && (
+              <p className="mt-1 text-xs text-error">{errors.state}</p>
+            )}
+          </div>
+
+          <div>
+            <label className={labelClass}>401(k) contribution %</label>
+            <input
+              type="number"
+              inputMode="decimal"
+              aria-label="401(k) contribution percent"
+              placeholder="0"
+              value={retirement401k}
+              onChange={(e) => setRetirement401k(e.target.value)}
+              className={inputClass}
+            />
+          </div>
+          <div>
+            <label className={labelClass}>Health insurance / paycheck</label>
+            <CurrencyInput
+              prefix
+              aria-label="Health insurance per paycheck"
+              placeholder="0"
+              value={healthInsurance}
+              onChange={setHealthInsurance}
+              className={inputClass}
+            />
+          </div>
+
+          <div>
+            <label className={labelClass}>
+              Extra federal withholding / paycheck
+            </label>
+            <CurrencyInput
+              prefix
+              aria-label="Extra federal withholding per paycheck"
+              placeholder="0"
+              value={additionalWithholding}
+              onChange={setAdditionalWithholding}
+              className={inputClass}
+            />
           </div>
         </div>
 

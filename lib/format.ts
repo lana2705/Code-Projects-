@@ -33,12 +33,17 @@ export function parseCurrencyInput(str: string): number {
   return parseFloat(cleaned)
 }
 
-/** Format a user-entered value as a display currency string ("$1,234.50"). */
-export function formatCurrencyInput(str: string): string {
+/**
+ * Format a user-entered value as a display currency string. With the default
+ * `withSymbol`, returns "$1,234.50"; when false, returns "1,234.50" (for use
+ * alongside a separate "$" prefix adornment).
+ */
+export function formatCurrencyInput(str: string, withSymbol = true): string {
   const n = parseCurrencyInput(str)
   if (isNaN(n)) return str
-  return `$${n.toLocaleString('en-US', {
+  const formatted = n.toLocaleString('en-US', {
     minimumFractionDigits: 2,
     maximumFractionDigits: 2,
-  })}`
+  })
+  return withSymbol ? `$${formatted}` : formatted
 }
