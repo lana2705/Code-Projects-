@@ -37,10 +37,11 @@ Create a `.env.local` file. All values may be left empty — every component
 handles the empty/unconfigured case gracefully.
 
 ```bash
-NEXT_PUBLIC_GA4_ID=            # Google Analytics 4 measurement ID
-NEXT_PUBLIC_ADSENSE_CLIENT_ID= # Google AdSense client ID
-NEXT_PUBLIC_ETSY_STORE_URL=    # Etsy store URL for the store CTA
-NEXT_PUBLIC_SITE_URL=          # Canonical site URL (used for SEO + sitemap)
+NEXT_PUBLIC_GA4_ID=              # Google Analytics 4 measurement ID
+NEXT_PUBLIC_ADSENSE_CLIENT_ID=   # Google AdSense client ID
+NEXT_PUBLIC_ETSY_STORE_URL=      # Etsy store URL for the store CTA
+NEXT_PUBLIC_SITE_URL=            # Canonical site URL (used for SEO + sitemap)
+NEXT_PUBLIC_FORMSPREE_ENDPOINT=  # Formspree form endpoint for the contact form
 ```
 
 - With `NEXT_PUBLIC_GA4_ID` empty, the GA4 script is not injected.
@@ -49,6 +50,9 @@ NEXT_PUBLIC_SITE_URL=          # Canonical site URL (used for SEO + sitemap)
 - With `NEXT_PUBLIC_ETSY_STORE_URL` empty, the Etsy CTA renders nothing.
 - With `NEXT_PUBLIC_SITE_URL` empty, SEO metadata falls back to a placeholder
   URL.
+- With `NEXT_PUBLIC_FORMSPREE_ENDPOINT` empty, the contact form falls back to
+  opening the visitor's email client with a prefilled message instead of
+  posting to Formspree.
 
 ## Scripts
 

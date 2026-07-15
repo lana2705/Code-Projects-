@@ -1,6 +1,6 @@
 import type { Metadata } from 'next'
 import ContactForm from '@/components/ContactForm'
-import { SITE_NAME, SITE_URL } from '@/lib/constants'
+import { FORMSPREE_ENDPOINT, SITE_NAME, SITE_URL } from '@/lib/constants'
 
 export const metadata: Metadata = {
   title: 'Contact',
@@ -25,8 +25,9 @@ export default function ContactPage() {
       </p>
       <ContactForm />
       <p className="mt-6 text-[13px] text-muted">
-        Note: For this MVP, submitting the form opens your email client with a
-        prefilled message — no backend or data storage involved.
+        {FORMSPREE_ENDPOINT
+          ? 'Your message is sent directly to us — no account or signup needed.'
+          : 'Note: Submitting the form opens your email client with a prefilled message — no backend or data storage involved.'}
       </p>
     </div>
   )
