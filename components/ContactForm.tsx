@@ -62,7 +62,7 @@ export default function ContactForm() {
     if (!FORMSPREE_ENDPOINT) {
       const subject = encodeURIComponent(`Message from ${name}`)
       const body = encodeURIComponent(`${message}\n\n— ${name} (${email})`)
-      window.location.href = `mailto:hello@financebeacon.com?subject=${subject}&body=${body}`
+      window.location.href = `mailto:hello@myfinancebeacon.com?subject=${subject}&body=${body}`
       setStatus('success')
       resetForm()
       return
@@ -101,23 +101,41 @@ export default function ContactForm() {
 
   const isSubmitting = status === 'submitting'
 
+  const handleReset = () => {
+    setStatus('idle')
+  }
+
   if (status === 'success') {
     return (
       <div
-        className="mt-8 flex max-w-lg flex-col items-center justify-center px-6 py-12 text-center"
+        className="mx-auto mt-6 flex max-w-[600px] flex-col items-center rounded-card border border-border bg-white px-12 py-14 text-center shadow-sm sm:px-16"
         aria-live="polite"
       >
-        <div className="mb-5 flex h-16 w-16 items-center justify-center rounded-full bg-accent">
-          <Check size={32} strokeWidth={2.5} className="text-white" />
+        <div
+          className="mb-5 flex h-16 w-16 items-center justify-center rounded-full border"
+          style={{ backgroundColor: '#E8F6EF', borderColor: '#C7E8D6' }}
+        >
+          <Check
+            size={28}
+            strokeWidth={2.5}
+            className="text-accent"
+            aria-hidden="true"
+          />
         </div>
         <h2 className="mb-2.5 text-[22px] font-semibold text-navy">
           Message sent!
         </h2>
-        <p className="max-w-[320px] text-sm leading-relaxed text-muted">
-          {FORMSPREE_ENDPOINT
-            ? "Thanks for reaching out. We'll get back to you soon."
-            : 'Thanks! Your email client should have opened with your message ready to send.'}
+        <p className="max-w-[360px] text-sm leading-relaxed text-muted">
+          Thanks for reaching out. I&apos;ll get back to you as soon as
+          possible.
         </p>
+        <button
+          type="button"
+          onClick={handleReset}
+          className="mt-6 rounded-btn border border-navy px-5 py-2.5 font-semibold text-navy transition-colors hover:bg-navy hover:text-white"
+        >
+          Send another message
+        </button>
       </div>
     )
   }
@@ -139,7 +157,11 @@ export default function ContactForm() {
           className={`${inputClass} ${fieldErrors.name ? errorInputClass : ''}`}
         />
         {fieldErrors.name && (
-          <p id="name-error" className="mt-1 text-xs text-error">
+          <p
+            id="name-error"
+            className="mt-1 text-xs text-error"
+            aria-live="polite"
+          >
             {fieldErrors.name}
           </p>
         )}
@@ -159,7 +181,11 @@ export default function ContactForm() {
           className={`${inputClass} ${fieldErrors.email ? errorInputClass : ''}`}
         />
         {fieldErrors.email && (
-          <p id="email-error" className="mt-1 text-xs text-error">
+          <p
+            id="email-error"
+            className="mt-1 text-xs text-error"
+            aria-live="polite"
+          >
             {fieldErrors.email}
           </p>
         )}
@@ -179,7 +205,11 @@ export default function ContactForm() {
           className={`${inputClass} ${fieldErrors.message ? errorInputClass : ''}`}
         />
         {fieldErrors.message && (
-          <p id="message-error" className="mt-1 text-xs text-error">
+          <p
+            id="message-error"
+            className="mt-1 text-xs text-error"
+            aria-live="polite"
+          >
             {fieldErrors.message}
           </p>
         )}

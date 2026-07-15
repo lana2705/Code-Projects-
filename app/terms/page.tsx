@@ -40,7 +40,7 @@ const SECTIONS: Section[] = [
     body: (
       <>
         Welcome to Finance Beacon. These Terms of Use govern your access to
-        and use of Finance Beacon.com and its financial calculators. By
+        and use of myfinancebeacon.com and its financial calculators. By
         using this website, you agree to these Terms.
       </>
     ),
@@ -198,7 +198,7 @@ const SECTIONS: Section[] = [
     body: (
       <>
         Questions about these Terms may be directed to us via our contact
-        page: Finance Beacon.com/contact
+        page: myfinancebeacon.com/contact
       </>
     ),
   },

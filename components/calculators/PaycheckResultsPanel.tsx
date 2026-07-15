@@ -108,7 +108,7 @@ export default function PaycheckResultsPanel({
       <div className="mt-8 grid gap-8 md:grid-cols-2">
         {/* Breakdown table */}
         <div>
-          <h3 className="mb-4 text-xl font-semibold text-navy">Breakdown</h3>
+          <h2 className="mb-4 text-xl font-semibold text-navy">Breakdown</h2>
           <div className="overflow-hidden rounded-card border border-border">
             <table className="w-full text-sm">
               <thead className="bg-surface text-muted">
@@ -158,9 +158,9 @@ export default function PaycheckResultsPanel({
 
         {/* Donut chart */}
         <div>
-          <h3 className="mb-4 text-xl font-semibold text-navy">
+          <h2 className="mb-4 text-xl font-semibold text-navy">
             Where your money goes
-          </h3>
+          </h2>
           <div className="flex flex-col items-center gap-6 sm:flex-row">
             <div
               className="relative h-44 w-44 shrink-0 rounded-full"

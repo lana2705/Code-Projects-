@@ -6,12 +6,12 @@ import { SITE_NAME, SITE_URL } from '@/lib/constants'
 export const metadata: Metadata = {
   title: 'Your Money, Clearly Calculated | Finance Beacon',
   description:
-    'Free tools that show you exactly where your paycheck goes — and exactly how fast you can get out of debt. No signup, no data stored.',
+    'Free tools that show you where your paycheck goes and how fast you can pay off your debt. No signup, no data stored.',
   alternates: { canonical: '/' },
   openGraph: {
     title: 'Your Money, Clearly Calculated | Finance Beacon',
     description:
-      'Free tools that show you exactly where your paycheck goes — and exactly how fast you can get out of debt. No signup, no data stored.',
+      'Free tools that show you where your paycheck goes and how fast you can pay off your debt. No signup, no data stored.',
     url: '/',
     siteName: SITE_NAME,
     images: [
@@ -69,8 +69,8 @@ export default function HomePage() {
           Your Money, Clearly Calculated.
         </h1>
         <p className="mx-auto mt-5 max-w-2xl text-balance text-lg text-muted">
-          Free tools that show you exactly where your paycheck goes — and
-          exactly how fast you can get out of debt.
+          Free tools that show you where your paycheck goes and how fast you
+          can pay off your debt.
         </p>
       </section>
 
@@ -83,7 +83,7 @@ export default function HomePage() {
               className="flex items-center gap-2 text-sm font-medium text-navy"
             >
               <span className="flex h-5 w-5 items-center justify-center rounded-full bg-accent/10 text-accent">
-                <Check size={13} strokeWidth={3} />
+                <Check size={13} strokeWidth={3} aria-hidden="true" />
               </span>
               {item}
             </span>
@@ -102,7 +102,7 @@ export default function HomePage() {
               className="group flex flex-col rounded-card border border-border bg-surface p-7 transition-shadow hover:shadow-md"
             >
               <span className="flex h-12 w-12 items-center justify-center rounded-card bg-navy/10 text-navy">
-                <Icon size={24} />
+                <Icon size={24} aria-hidden="true" />
               </span>
               <h2 className="mt-5 text-xl font-semibold text-navy">
                 {tool.name}
@@ -120,7 +120,7 @@ export default function HomePage() {
       <section className="pb-16">
         <div className="mx-auto flex max-w-xl items-center justify-center gap-3 text-center">
           <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-navy/5 text-navy">
-            <Rocket size={16} />
+            <Rocket size={16} aria-hidden="true" />
           </span>
           <p className="text-sm text-muted">
             More tools coming soon — built in San Francisco for anyone who wants

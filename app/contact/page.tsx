@@ -37,7 +37,7 @@ export default function ContactPage() {
       <ContactForm />
       <p className="mt-6 text-[13px] text-muted">
         {FORMSPREE_ENDPOINT
-          ? 'Your message is sent directly to us — no account or signup needed.'
+          ? 'Your message is sent directly to us. No account or signup needed.'
           : 'Note: Submitting the form opens your email client with a prefilled message — no backend or data storage involved.'}
       </p>
     </div>

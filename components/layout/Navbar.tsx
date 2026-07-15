@@ -57,7 +57,7 @@ export default function Navbar() {
               aria-expanded={calcOpen}
             >
               Calculators
-              <ChevronDown size={16} />
+              <ChevronDown size={16} aria-hidden="true" />
             </button>
             {calcOpen && (
               <div className="absolute left-0 top-full w-64 rounded-card border border-border bg-white py-2 shadow-lg">
@@ -94,7 +94,11 @@ export default function Navbar() {
           aria-label="Toggle menu"
           aria-expanded={mobileOpen}
         >
-          {mobileOpen ? <X size={24} /> : <Menu size={24} />}
+          {mobileOpen ? (
+            <X size={24} aria-hidden="true" />
+          ) : (
+            <Menu size={24} aria-hidden="true" />
+          )}
         </button>
       </nav>
 

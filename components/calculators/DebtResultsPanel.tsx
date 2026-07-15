@@ -161,7 +161,11 @@ export default function DebtResultsPanel({
       {/* Tip banner */}
       {recommendation && (
         <div className="mb-6 flex items-start gap-3 rounded-card border border-accent bg-accent/5 p-4">
-          <Lightbulb className="mt-0.5 shrink-0 text-accent" size={20} />
+          <Lightbulb
+            className="mt-0.5 shrink-0 text-accent"
+            size={20}
+            aria-hidden="true"
+          />
           <p className="text-sm text-navy">
             <strong className="font-semibold">
               Pay off {recommendation.debt.name} first.
@@ -171,25 +175,24 @@ export default function DebtResultsPanel({
         </div>
       )}
 
+      {/* Hero number */}
+      <div className="rounded-card border border-border bg-surface p-6 text-center">
+        <p className="text-sm text-muted">You&apos;ll be debt-free</p>
+        <p className="mt-2 text-[40px] font-bold leading-tight text-accent">
+          {selectedResult.cappedOut
+            ? '50+ years'
+            : formatShortDate(selectedResult.payoffDate)}
+        </p>
+        {!selectedResult.cappedOut && (
+          <p className="text-sm text-muted">
+            {selectedResult.monthsToPayoff} months ·{' '}
+            {formatMonths(selectedResult.monthsToPayoff)}
+          </p>
+        )}
+      </div>
+
       {/* Summary cards */}
-      <div className="grid gap-4 sm:grid-cols-3">
-        <div className="rounded-card border border-border bg-surface p-5">
-          <p className="text-xs font-medium uppercase tracking-wide text-muted">
-            You&apos;ll be debt-free
-          </p>
-          <p className="mt-2 text-2xl font-bold text-navy">
-            {selectedResult.cappedOut
-              ? '50+ years'
-              : formatShortDate(selectedResult.payoffDate)}
-          </p>
-          <p className="mt-1 text-xs text-muted">
-            {selectedResult.cappedOut
-              ? ''
-              : `${selectedResult.monthsToPayoff} months · ${formatMonths(
-                  selectedResult.monthsToPayoff,
-                )}`}
-          </p>
-        </div>
+      <div className="mt-8 grid gap-4 sm:grid-cols-2">
         <div className="rounded-card border border-border bg-surface p-5">
           <p className="text-xs font-medium uppercase tracking-wide text-muted">
             Total interest paid
@@ -210,7 +213,7 @@ export default function DebtResultsPanel({
 
       {/* Avalanche vs Snowball comparison */}
       <div className="mt-8">
-        <h3 className="text-lg font-semibold text-navy">Avalanche vs snowball</h3>
+        <h2 className="text-lg font-semibold text-navy">Avalanche vs snowball</h2>
         <p className="mb-3 text-sm text-muted">
           Select a method to view its payment plan below.
         </p>
@@ -255,6 +258,7 @@ export default function DebtResultsPanel({
           {scheduleOpen ? 'Hide' : 'Show'} {selectedMethod} payment schedule
           <ChevronDown
             size={16}
+            aria-hidden="true"
             className={`transition-transform ${scheduleOpen ? 'rotate-180' : ''}`}
           />
         </button>

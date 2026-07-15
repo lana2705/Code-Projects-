@@ -154,6 +154,7 @@ export default function DebtPayoffCalculator() {
                   </label>
                   <input
                     type="text"
+                    aria-label="Debt name"
                     placeholder="e.g. Chase Visa"
                     value={row.name}
                     onChange={(ev) =>
@@ -187,6 +188,7 @@ export default function DebtPayoffCalculator() {
                   <input
                     type="number"
                     inputMode="decimal"
+                    aria-label="APR percent"
                     placeholder="0.00"
                     value={row.apr}
                     onChange={(ev) => updateRow(row.id, 'apr', ev.target.value)}
@@ -218,7 +220,7 @@ export default function DebtPayoffCalculator() {
                   aria-label="Remove debt"
                   className="flex h-[38px] w-9 items-center justify-center rounded-input text-muted transition-colors hover:text-error disabled:cursor-not-allowed disabled:opacity-30"
                 >
-                  <Trash2 size={18} />
+                  <Trash2 size={18} aria-hidden="true" />
                 </button>
               </div>
             )
@@ -231,7 +233,7 @@ export default function DebtPayoffCalculator() {
           disabled={rows.length >= MAX_DEBTS}
           className="mt-4 inline-flex items-center gap-1 text-sm font-semibold text-navy transition-colors hover:text-accent disabled:cursor-not-allowed disabled:opacity-40"
         >
-          <Plus size={16} /> Add another debt
+          <Plus size={16} aria-hidden="true" /> Add another debt
         </button>
 
         <div className="mt-6 max-w-xs">

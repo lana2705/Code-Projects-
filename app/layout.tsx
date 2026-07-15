@@ -22,6 +22,10 @@ export const metadata: Metadata = {
   },
   description:
     'Free finance calculators for real people. Calculate your take-home pay, plan your debt payoff, and keep more of what you earn.',
+  manifest: '/site.webmanifest',
+  other: {
+    'google-adsense-account': 'ca-pub-PLACEHOLDER',
+  },
 }
 
 export default function RootLayout({
