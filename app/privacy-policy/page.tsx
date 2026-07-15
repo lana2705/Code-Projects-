@@ -1,10 +1,28 @@
 import type { Metadata } from 'next'
-import { SITE_NAME, SITE_URL } from '@/lib/constants'
+import { SITE_NAME } from '@/lib/constants'
 
 export const metadata: Metadata = {
   title: 'Privacy Policy',
   description: `Privacy policy for ${SITE_NAME} — how and why we access, collect, store, use, and share personal information.`,
-  alternates: { canonical: `${SITE_URL}/privacy-policy` },
+  alternates: { canonical: '/privacy-policy' },
+  openGraph: {
+    title: `Privacy Policy | ${SITE_NAME}`,
+    description: `Privacy policy for ${SITE_NAME} — how and why we access, collect, store, use, and share personal information.`,
+    url: '/privacy-policy',
+    siteName: SITE_NAME,
+    images: [
+      {
+        url: '/og-image.png',
+        width: 1200,
+        height: 630,
+        alt: 'Finance Beacon — Free Finance Calculators',
+      },
+    ],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    images: ['/og-image.png'],
+  },
 }
 
 const DSAR_URL =

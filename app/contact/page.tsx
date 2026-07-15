@@ -1,16 +1,27 @@
 import type { Metadata } from 'next'
 import ContactForm from '@/components/ContactForm'
-import { FORMSPREE_ENDPOINT, SITE_NAME, SITE_URL } from '@/lib/constants'
+import { FORMSPREE_ENDPOINT, SITE_NAME } from '@/lib/constants'
 
 export const metadata: Metadata = {
   title: 'Contact',
   description: `Get in touch with the ${SITE_NAME} team.`,
-  alternates: { canonical: `${SITE_URL}/contact` },
+  alternates: { canonical: '/contact' },
   openGraph: {
     title: `Contact | ${SITE_NAME}`,
     description: `Get in touch with the ${SITE_NAME} team.`,
-    url: `${SITE_URL}/contact`,
+    url: '/contact',
     siteName: SITE_NAME,
+    images: [
+      {
+        url: '/og-image.png',
+        width: 1200,
+        height: 630,
+        alt: 'Finance Beacon — Free Finance Calculators',
+      },
+    ],
+  },
+  twitter: {
+    card: 'summary_large_image',
     images: ['/og-image.png'],
   },
 }

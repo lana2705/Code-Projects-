@@ -3,6 +3,7 @@
 import { useMemo } from 'react'
 import type { PaycheckResult } from '@/types/calculator'
 import { formatCurrency, formatPercent } from '@/lib/format'
+import AdSenseSlot from '@/components/shared/AdSenseSlot'
 
 interface PaycheckResultsPanelProps {
   result: PaycheckResult
@@ -216,6 +217,10 @@ export default function PaycheckResultsPanel({
         elections, deductions, and credits. Consult a tax professional for
         precise figures.
       </p>
+
+      {/* This panel only mounts once results exist, so the ad is never
+          visible before the user clicks Calculate. */}
+      <AdSenseSlot slot="PAYCHECK_CALC_RESULTS" />
     </section>
   )
 }

@@ -1,11 +1,29 @@
 import type { Metadata } from 'next'
-import { SITE_NAME, SITE_URL } from '@/lib/constants'
+import { SITE_NAME } from '@/lib/constants'
 
 export const metadata: Metadata = {
   title: 'Terms of Use',
   description: `Terms of use for ${SITE_NAME}.`,
-  alternates: { canonical: `${SITE_URL}/terms` },
+  alternates: { canonical: '/terms' },
   robots: { index: false, follow: true },
+  openGraph: {
+    title: `Terms of Use | ${SITE_NAME}`,
+    description: `Terms of use for ${SITE_NAME}.`,
+    url: '/terms',
+    siteName: SITE_NAME,
+    images: [
+      {
+        url: '/og-image.png',
+        width: 1200,
+        height: 630,
+        alt: 'Finance Beacon — Free Finance Calculators',
+      },
+    ],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    images: ['/og-image.png'],
+  },
 }
 
 const h2 = 'mb-2 mt-6 text-base font-bold text-navy'

@@ -1,6 +1,7 @@
 'use client'
 
 import { useState } from 'react'
+import { Check } from 'lucide-react'
 import { FORMSPREE_ENDPOINT } from '@/lib/constants'
 
 const inputClass =
@@ -100,6 +101,27 @@ export default function ContactForm() {
 
   const isSubmitting = status === 'submitting'
 
+  if (status === 'success') {
+    return (
+      <div
+        className="mt-8 flex max-w-lg flex-col items-center justify-center px-6 py-12 text-center"
+        aria-live="polite"
+      >
+        <div className="mb-5 flex h-16 w-16 items-center justify-center rounded-full bg-accent">
+          <Check size={32} strokeWidth={2.5} className="text-white" />
+        </div>
+        <h2 className="mb-2.5 text-[22px] font-semibold text-navy">
+          Message sent!
+        </h2>
+        <p className="max-w-[320px] text-sm leading-relaxed text-muted">
+          {FORMSPREE_ENDPOINT
+            ? "Thanks for reaching out. We'll get back to you soon."
+            : 'Thanks! Your email client should have opened with your message ready to send.'}
+        </p>
+      </div>
+    )
+  }
+
   return (
     <form onSubmit={handleSubmit} noValidate className="mt-8 max-w-lg space-y-4">
       <div>
@@ -170,18 +192,11 @@ export default function ContactForm() {
         {isSubmitting ? 'Sending…' : 'Send message'}
       </button>
 
-      <div aria-live="polite">
-        {status === 'success' && (
-          <p className="text-sm text-accent">
-            {FORMSPREE_ENDPOINT
-              ? "Thanks for reaching out! We'll get back to you soon."
-              : 'Thanks! Your email client should have opened with your message ready to send.'}
-          </p>
-        )}
-        {status === 'error' && formError && (
-          <p className="text-sm text-error">{formError}</p>
-        )}
-      </div>
+      {status === 'error' && formError && (
+        <p className="text-sm text-error" aria-live="polite">
+          {formError}
+        </p>
+      )}
     </form>
   )
 }

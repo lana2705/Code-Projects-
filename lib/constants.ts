@@ -12,4 +12,4 @@ export const FORMSPREE_ENDPOINT =
 // Falls back when the env var is unset OR empty (empty string is the default
 // placeholder in .env.local), so metadataBase always receives a valid URL.
 export const SITE_URL =
-  process.env.NEXT_PUBLIC_SITE_URL || 'https://example.com'
+  process.env.NEXT_PUBLIC_SITE_URL || 'https://myfinancebeacon.com'

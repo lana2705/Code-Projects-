@@ -7,13 +7,24 @@ export const metadata: Metadata = {
   title: 'Your Money, Clearly Calculated | Finance Beacon',
   description:
     'Free tools that show you exactly where your paycheck goes — and exactly how fast you can get out of debt. No signup, no data stored.',
-  alternates: { canonical: SITE_URL },
+  alternates: { canonical: '/' },
   openGraph: {
     title: 'Your Money, Clearly Calculated | Finance Beacon',
     description:
       'Free tools that show you exactly where your paycheck goes — and exactly how fast you can get out of debt. No signup, no data stored.',
-    url: SITE_URL,
+    url: '/',
     siteName: SITE_NAME,
+    images: [
+      {
+        url: '/og-image.png',
+        width: 1200,
+        height: 630,
+        alt: 'Finance Beacon — Free Finance Calculators',
+      },
+    ],
+  },
+  twitter: {
+    card: 'summary_large_image',
     images: ['/og-image.png'],
   },
 }
@@ -58,8 +69,8 @@ export default function HomePage() {
           Your Money, Clearly Calculated.
         </h1>
         <p className="mx-auto mt-5 max-w-2xl text-balance text-lg text-muted">
-          Simple financial calculators that help you make better money
-          decisions.
+          Free tools that show you exactly where your paycheck goes — and
+          exactly how fast you can get out of debt.
         </p>
       </section>
 

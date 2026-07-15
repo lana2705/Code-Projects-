@@ -272,6 +272,7 @@ export default function DebtPayoffCalculator() {
 
       {comparison && (
         <div ref={resultsRef} className="scroll-mt-20">
+          <hr className="my-6 border-0 border-t border-border" />
           <DebtResultsPanel comparison={comparison} debts={debts} />
         </div>
       )}

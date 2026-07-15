@@ -187,8 +187,9 @@ export default function PaycheckCalculator() {
                 %
               </span>
             </div>
-            <p className="mt-1 text-xs text-muted">
-              Percent of your gross pay (not a dollar amount).
+            <p className="mt-1 text-xs italic text-[#9CA3AF]">
+              Enter a percentage of your gross pay (e.g. 6 for 6%). Do not
+              enter a dollar amount.
             </p>
             {errors.retirement401k && (
               <p className="mt-1 text-xs text-error">
@@ -232,6 +233,7 @@ export default function PaycheckCalculator() {
 
       {result && (
         <div ref={resultsRef} className="scroll-mt-20">
+          <hr className="my-6 border-0 border-t border-border" />
           <PaycheckResultsPanel result={result} />
         </div>
       )}

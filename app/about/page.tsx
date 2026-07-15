@@ -1,18 +1,29 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
-import { SITE_NAME, SITE_URL } from '@/lib/constants'
+import { SITE_NAME } from '@/lib/constants'
 
 export const metadata: Metadata = {
   title: 'About',
   description:
     'Finance Beacon is a free personal finance website that helps you make informed financial decisions with simple, accurate calculators. No account required, and your data is never stored.',
-  alternates: { canonical: `${SITE_URL}/about` },
+  alternates: { canonical: '/about' },
   openGraph: {
     title: `About | ${SITE_NAME}`,
     description:
       'Finance Beacon is a free personal finance website that helps you make informed financial decisions with simple, accurate calculators. No account required, and your data is never stored.',
-    url: `${SITE_URL}/about`,
+    url: '/about',
     siteName: SITE_NAME,
+    images: [
+      {
+        url: '/og-image.png',
+        width: 1200,
+        height: 630,
+        alt: 'Finance Beacon — Free Finance Calculators',
+      },
+    ],
+  },
+  twitter: {
+    card: 'summary_large_image',
     images: ['/og-image.png'],
   },
 }

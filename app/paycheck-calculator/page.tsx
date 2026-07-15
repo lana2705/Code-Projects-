@@ -1,7 +1,6 @@
 import type { Metadata } from 'next'
 import PaycheckCalculator from '@/components/calculators/PaycheckCalculator'
 import EtsyCTA from '@/components/shared/EtsyCTA'
-import AdSenseSlot from '@/components/shared/AdSenseSlot'
 import FAQAccordion, { type FAQItem } from '@/components/shared/FAQAccordion'
 import { SITE_NAME, SITE_URL } from '@/lib/constants'
 
@@ -9,17 +8,31 @@ const TITLE =
   'Paycheck Calculator — Calculate Your Take-Home Pay | Finance Beacon'
 const DESCRIPTION =
   'Free paycheck calculator. Enter your salary, state, and deductions to see exactly what hits your bank account after federal tax, state tax, and FICA.'
-const URL = `${SITE_URL}/paycheck-calculator`
+const PATH = '/paycheck-calculator'
+// JSON-LD requires an absolute URL — the metadata block below uses relative
+// paths and resolves them via the root layout's metadataBase instead.
+const ABSOLUTE_URL = `${SITE_URL}${PATH}`
 
 export const metadata: Metadata = {
   title: 'Paycheck Calculator — Calculate Your Take-Home Pay',
   description: DESCRIPTION,
-  alternates: { canonical: URL },
+  alternates: { canonical: PATH },
   openGraph: {
     title: TITLE,
     description: DESCRIPTION,
-    url: URL,
+    url: PATH,
     siteName: SITE_NAME,
+    images: [
+      {
+        url: '/og-image.png',
+        width: 1200,
+        height: 630,
+        alt: 'Finance Beacon — Free Finance Calculators',
+      },
+    ],
+  },
+  twitter: {
+    card: 'summary_large_image',
     images: ['/og-image.png'],
   },
 }
@@ -50,23 +63,13 @@ const paycheckFAQs: FAQItem[] = [
     answer:
       'Gross pay is your salary or hourly wages before any deductions. Net pay — your take-home pay — is what\'s left after federal taxes, state taxes, FICA, and any pre-tax deductions like 401(k) or health insurance premiums are subtracted.',
   },
-  {
-    question: 'How is take-home pay calculated?',
-    answer:
-      'Your take-home pay starts with your gross salary and works through several layers of deductions. First come pre-tax deductions like 401(k) contributions and health insurance premiums, which reduce your taxable income. Then federal income tax is applied using progressive brackets — you only pay each rate on the income within that bracket, not on your total income. Next come FICA taxes: 6.2% for Social Security and 1.45% for Medicare. State income tax varies widely — from 0% in Texas and Florida to over 9% in California. The result is your net pay — the amount that actually hits your bank account.',
-  },
-  {
-    question: 'Why does my paycheck feel smaller than my salary?',
-    answer:
-      'A $70,000 salary sounds like $5,833 per month. But after federal tax, FICA, state tax, and a modest 401(k) contribution, you might take home closer to $4,200–$4,500 per month. That gap is real, and understanding it helps you budget realistically rather than planning around your gross salary. The paycheck calculator above shows you exactly where each dollar goes before it reaches you.',
-  },
 ]
 
 const webAppSchema = {
   '@context': 'https://schema.org',
   '@type': 'WebApplication',
   name: 'Paycheck Calculator',
-  url: URL,
+  url: ABSOLUTE_URL,
   applicationCategory: 'FinanceApplication',
   operatingSystem: 'Any',
   offers: {
@@ -98,8 +101,36 @@ export default function PaycheckPage() {
       </div>
 
       <EtsyCTA page="paycheck" />
-      <AdSenseSlot slot="PAYCHECK_CALC_RESULTS" />
       <FAQAccordion items={paycheckFAQs} />
+
+      <section className="mt-8">
+        <h2 className="mb-3 text-xl font-semibold text-navy">
+          How is take-home pay calculated?
+        </h2>
+        <p className="mb-6 text-sm leading-[1.7] text-muted">
+          Your take-home pay starts with your gross salary and works through
+          several layers of deductions. First come pre-tax deductions like
+          401(k) contributions and health insurance premiums, which reduce
+          your taxable income. Then federal income tax is applied using
+          progressive brackets — you only pay each rate on the income within
+          that bracket, not on your total income. Next come FICA taxes: 6.2%
+          for Social Security and 1.45% for Medicare. State income tax varies
+          widely — from 0% in Texas and Florida to over 9% in California. The
+          result is your net pay — the amount that actually hits your bank
+          account.
+        </p>
+        <h2 className="mb-3 text-xl font-semibold text-navy">
+          Why does my paycheck feel smaller than my salary?
+        </h2>
+        <p className="text-sm leading-[1.7] text-muted">
+          A $70,000 salary sounds like $5,833 per month. But after federal
+          tax, FICA, state tax, and a modest 401(k) contribution, you might
+          take home closer to $4,200–$4,500 per month. That gap is real, and
+          understanding it helps you budget realistically rather than
+          planning around your gross salary. The paycheck calculator above
+          shows you exactly where each dollar goes before it reaches you.
+        </p>
+      </section>
     </div>
   )
 }
