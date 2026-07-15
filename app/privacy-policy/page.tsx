@@ -251,6 +251,21 @@ export default function PrivacyPolicyPage() {
         Services, or otherwise when you contact us.
       </p>
       <p className={p}>
+        <strong>Personal Information Provided by You.</strong> The personal
+        information that we collect depends on the context of your interactions
+        with us and the Services, the choices you make, and the products and
+        features you use. The personal information we collect may include the
+        following:
+      </p>
+      <ul className={ul}>
+        <li>
+          The financial information you enter into our calculators is processed
+          entirely within your browser and is never transmitted to or stored on
+          our servers. We do not retain any financial data you input into our
+          tools.
+        </li>
+      </ul>
+      <p className={p}>
         <strong>Sensitive Information.</strong> We do not process sensitive
         information.
       </p>
