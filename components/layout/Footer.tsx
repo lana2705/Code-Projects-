@@ -16,7 +16,7 @@ export default function Footer() {
 
   return (
     <footer className="mt-16 border-t border-border bg-surface">
-      <div className="mx-auto max-w-6xl px-4 py-10 sm:px-6">
+      <div className="mx-auto flex max-w-6xl flex-col gap-4 px-4 py-10 sm:flex-row sm:items-center sm:justify-between sm:px-6">
         <nav className="flex flex-wrap gap-x-6 gap-y-3">
           {LINKS.map((link) => (
             <Link
@@ -28,7 +28,7 @@ export default function Footer() {
             </Link>
           ))}
         </nav>
-        <p className="mt-6 text-sm text-muted">
+        <p className="text-right text-sm text-muted">
           © {year} {SITE_NAME}. Free to use. No data stored.
         </p>
       </div>
