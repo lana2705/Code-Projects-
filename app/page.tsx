@@ -4,12 +4,12 @@ import { TrendingDown, Wallet, Check, Rocket } from 'lucide-react'
 import { SITE_NAME, SITE_URL } from '@/lib/constants'
 
 export const metadata: Metadata = {
-  title: 'Your Money, Clearly Calculated | TheFinanceBeacon',
+  title: 'Your Money, Clearly Calculated | Finance Beacon',
   description:
     'Free tools that show you exactly where your paycheck goes — and exactly how fast you can get out of debt. No signup, no data stored.',
   alternates: { canonical: SITE_URL },
   openGraph: {
-    title: 'Your Money, Clearly Calculated | TheFinanceBeacon',
+    title: 'Your Money, Clearly Calculated | Finance Beacon',
     description:
       'Free tools that show you exactly where your paycheck goes — and exactly how fast you can get out of debt. No signup, no data stored.',
     url: SITE_URL,

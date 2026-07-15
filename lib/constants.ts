@@ -1,4 +1,4 @@
-export const SITE_NAME = 'TheFinanceBeacon'
+export const SITE_NAME = 'Finance Beacon'
 
 export const SITE_TAGLINE = 'Your Money, Clearly Calculated.'
 

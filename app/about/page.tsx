@@ -5,12 +5,12 @@ import { SITE_NAME, SITE_URL } from '@/lib/constants'
 export const metadata: Metadata = {
   title: 'About',
   description:
-    'TheFinanceBeacon is a free personal finance website that helps you make informed financial decisions with simple, accurate calculators. No account required, and your data is never stored.',
+    'Finance Beacon is a free personal finance website that helps you make informed financial decisions with simple, accurate calculators. No account required, and your data is never stored.',
   alternates: { canonical: `${SITE_URL}/about` },
   openGraph: {
     title: `About | ${SITE_NAME}`,
     description:
-      'TheFinanceBeacon is a free personal finance website that helps you make informed financial decisions with simple, accurate calculators. No account required, and your data is never stored.',
+      'Finance Beacon is a free personal finance website that helps you make informed financial decisions with simple, accurate calculators. No account required, and your data is never stored.',
     url: `${SITE_URL}/about`,
     siteName: SITE_NAME,
     images: ['/og-image.png'],

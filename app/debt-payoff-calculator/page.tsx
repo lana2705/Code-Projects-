@@ -6,7 +6,7 @@ import FAQAccordion, { type FAQItem } from '@/components/shared/FAQAccordion'
 import { SITE_NAME, SITE_URL } from '@/lib/constants'
 
 const TITLE =
-  'Debt Payoff Calculator — Avalanche vs Snowball | TheFinanceBeacon'
+  'Debt Payoff Calculator — Avalanche vs Snowball | Finance Beacon'
 const DESCRIPTION =
   'Free debt payoff calculator. Compare the avalanche and snowball methods side by side. See your debt-free date and total interest paid in seconds.'
 const URL = `${SITE_URL}/debt-payoff-calculator`

@@ -1,8 +1,8 @@
-# TheFinanceBeacon
+# Finance Beacon
 
 Your money, clearly calculated.
 
-TheFinanceBeacon is a pure client-side tool site — no accounts, no database, no
+Finance Beacon is a pure client-side tool site — no accounts, no database, no
 backend. Every calculation runs in the browser; your numbers never leave your
 device.
 

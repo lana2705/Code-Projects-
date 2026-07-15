@@ -61,7 +61,7 @@ export default function ContactForm() {
     if (!FORMSPREE_ENDPOINT) {
       const subject = encodeURIComponent(`Message from ${name}`)
       const body = encodeURIComponent(`${message}\n\n— ${name} (${email})`)
-      window.location.href = `mailto:hello@thefinancebeacon.com?subject=${subject}&body=${body}`
+      window.location.href = `mailto:hello@financebeacon.com?subject=${subject}&body=${body}`
       setStatus('success')
       resetForm()
       return

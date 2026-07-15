@@ -6,7 +6,7 @@ import FAQAccordion, { type FAQItem } from '@/components/shared/FAQAccordion'
 import { SITE_NAME, SITE_URL } from '@/lib/constants'
 
 const TITLE =
-  'Paycheck Calculator — Calculate Your Take-Home Pay | TheFinanceBeacon'
+  'Paycheck Calculator — Calculate Your Take-Home Pay | Finance Beacon'
 const DESCRIPTION =
   'Free paycheck calculator. Enter your salary, state, and deductions to see exactly what hits your bank account after federal tax, state tax, and FICA.'
 const URL = `${SITE_URL}/paycheck-calculator`

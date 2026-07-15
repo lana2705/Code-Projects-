@@ -21,8 +21,8 @@ const SECTIONS: Section[] = [
     heading: 'Welcome',
     body: (
       <>
-        Welcome to TheFinanceBeacon. These Terms of Use govern your access to
-        and use of TheFinanceBeacon.com and its financial calculators. By
+        Welcome to Finance Beacon. These Terms of Use govern your access to
+        and use of Finance Beacon.com and its financial calculators. By
         using this website, you agree to these Terms.
       </>
     ),
@@ -31,7 +31,7 @@ const SECTIONS: Section[] = [
     heading: 'Use of the Website',
     body: (
       <>
-        TheFinanceBeacon provides free financial calculators and
+        Finance Beacon provides free financial calculators and
         informational tools for personal use. You agree to use this website
         only for lawful purposes and in a manner consistent with these Terms.
       </>
@@ -41,7 +41,7 @@ const SECTIONS: Section[] = [
     heading: 'Calculator Results',
     body: (
       <>
-        The calculators on TheFinanceBeacon are designed to provide estimates
+        The calculators on Finance Beacon are designed to provide estimates
         based on the information you enter. Although we strive for accuracy,
         results are estimates only and may vary due to changes in tax laws,
         financial regulations, interest rate assumptions, rounding
@@ -66,7 +66,7 @@ const SECTIONS: Section[] = [
     heading: 'No Professional Advice',
     body: (
       <>
-        TheFinanceBeacon does not provide financial, tax, legal, accounting,
+        Finance Beacon does not provide financial, tax, legal, accounting,
         or investment advice. All content on this website is intended for
         informational and educational purposes only. Always consult a
         qualified professional regarding your individual financial situation
@@ -78,7 +78,7 @@ const SECTIONS: Section[] = [
     heading: 'No Warranty',
     body: (
       <>
-        TheFinanceBeacon is provided &ldquo;as is&rdquo; and &ldquo;as
+        Finance Beacon is provided &ldquo;as is&rdquo; and &ldquo;as
         available&rdquo; without warranties of any kind, express or implied,
         including but not limited to implied warranties of merchantability,
         fitness for a particular purpose, or non-infringement. We do not
@@ -91,7 +91,7 @@ const SECTIONS: Section[] = [
     heading: 'Limitation of Liability',
     body: (
       <>
-        To the fullest extent permitted by law, TheFinanceBeacon and its
+        To the fullest extent permitted by law, Finance Beacon and its
         owner shall not be liable for any direct, indirect, incidental,
         consequential, special, or punitive damages arising from your use of
         — or inability to use — this website or any reliance on calculator
@@ -103,9 +103,9 @@ const SECTIONS: Section[] = [
     heading: 'Intellectual Property',
     body: (
       <>
-        Unless otherwise noted, all content on TheFinanceBeacon — including
+        Unless otherwise noted, all content on Finance Beacon — including
         text, design, graphics, logos, and software — is the property of
-        TheFinanceBeacon and may not be copied, reproduced, or distributed
+        Finance Beacon and may not be copied, reproduced, or distributed
         without written permission.
       </>
     ),
@@ -125,10 +125,10 @@ const SECTIONS: Section[] = [
     heading: 'Advertising',
     body: (
       <>
-        TheFinanceBeacon may display advertisements through Google AdSense or
+        Finance Beacon may display advertisements through Google AdSense or
         other advertising providers. Advertisements are served by third
         parties and do not constitute endorsements or recommendations by
-        TheFinanceBeacon.
+        Finance Beacon.
       </>
     ),
   },
@@ -180,7 +180,7 @@ const SECTIONS: Section[] = [
     body: (
       <>
         Questions about these Terms may be directed to us via our contact
-        page: theFinanceBeacon.com/contact
+        page: Finance Beacon.com/contact
       </>
     ),
   },
