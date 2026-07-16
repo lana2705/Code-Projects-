@@ -26,8 +26,8 @@ export const metadata: Metadata = {
   },
 }
 
-const h2 = 'mb-2 mt-6 text-base font-bold text-navy'
-const p = 'text-[14px] leading-[1.7] text-[#374151]'
+const h2 = 'mt-10 text-2xl font-semibold text-navy'
+const p = 'mt-3 leading-relaxed text-muted'
 
 interface Section {
   heading: string
@@ -206,11 +206,9 @@ const SECTIONS: Section[] = [
 
 export default function TermsPage() {
   return (
-    <div className="mx-auto max-w-[720px] px-4 py-12 sm:px-6">
+    <div className="mx-auto max-w-3xl px-4 py-12 sm:px-6">
       <h1 className="text-4xl font-bold text-navy">Terms of Use</h1>
-      <p className="mt-2 text-[13px] italic text-[#6B7280]">
-        Last updated: July 2026
-      </p>
+      <p className="mt-2 text-sm text-muted">Last updated July 2026</p>
 
       {SECTIONS.map((section) => (
         <section key={section.heading}>
