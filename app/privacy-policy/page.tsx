@@ -727,9 +727,7 @@ export default function PrivacyPolicyPage() {
       <address className="mt-3 not-italic leading-relaxed text-muted">
         Finance Beacon
         <br />
-        1601 30th Ave
-        <br />
-        San Francisco, CA 94122
+        San Francisco, CA
         <br />
         United States
       </address>
