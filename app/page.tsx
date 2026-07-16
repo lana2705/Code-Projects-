@@ -123,8 +123,8 @@ export default function HomePage() {
             <Rocket size={16} aria-hidden="true" />
           </span>
           <p className="text-sm text-muted">
-            More tools coming soon — built in San Francisco for anyone who wants
-            clarity about their money.
+            More tools coming soon — built for anyone who wants clarity about
+            their money.
           </p>
         </div>
       </section>

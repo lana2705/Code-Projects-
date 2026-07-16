@@ -49,11 +49,13 @@ export default function AboutPage() {
           financial decisions.
         </p>
         <p>
-          {SITE_NAME} was created by a product manager and personal finance
-          enthusiast who wanted a better alternative to slow, cluttered
-          financial websites. The goal is simple: build fast, easy-to-use tools
-          that help people understand their finances without unnecessary
-          complexity.
+          {SITE_NAME} was created to make everyday financial calculations
+          faster, simpler, and easier to understand. Too many financial tools
+          are cluttered with ads, unnecessary features, or confusing
+          explanations. Our goal is to build calculators that are genuinely
+          useful, fast, accurate, and privacy-first, so you can spend less
+          time figuring out the math and more time making confident financial
+          decisions.
         </p>
       </div>
       <div className="mt-8 flex flex-col gap-3 sm:flex-row">
