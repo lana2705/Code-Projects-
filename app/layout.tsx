@@ -40,6 +40,9 @@ export const metadata: Metadata = {
     ],
     apple: '/apple-touch-icon.png',
   },
+  verification: {
+    google: 'aIFkKgDOBdxMPDBSV-ilWuSuy5y8fEN7hndYKawNLBU',
+  },
   other: {
     'google-adsense-account': 'ca-pub-PLACEHOLDER',
   },
