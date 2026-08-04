@@ -44,7 +44,7 @@ export const metadata: Metadata = {
     google: 'aIFkKgDOBdxMPDBSV-ilWuSuy5y8fEN7hndYKawNLBU',
   },
   other: {
-    'google-adsense-account': 'ca-pub-PLACEHOLDER',
+    'google-adsense-account': 'ca-pub-8557681919112088',
   },
 }
 
@@ -56,6 +56,14 @@ export default function RootLayout({
   return (
     <html lang="en" className={inter.variable}>
       <body className="flex min-h-screen flex-col bg-white font-sans text-[16px] leading-relaxed text-[#111827] antialiased">
+        {/* beforeInteractive scripts are hoisted into <head> by Next.js
+            regardless of where they're rendered in the tree. */}
+        <Script
+          async
+          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8557681919112088"
+          crossOrigin="anonymous"
+          strategy="beforeInteractive"
+        />
         {/* GA4 — next/script injects into the document head automatically.
             Rendered only when NEXT_PUBLIC_GA4_ID is configured. */}
         {GA4_ID && (
