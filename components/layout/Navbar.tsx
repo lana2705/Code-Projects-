@@ -78,6 +78,9 @@ export default function Navbar() {
             )}
           </div>
 
+          <Link href="/blog" className={linkClass('/blog')}>
+            Blog
+          </Link>
           <Link href="/about" className={linkClass('/about')}>
             About
           </Link>
@@ -128,6 +131,13 @@ export default function Navbar() {
                 </Link>
               ))}
             </div>
+            <Link
+              href="/blog"
+              className={`py-3 ${linkClass('/blog')}`}
+              onClick={() => setMobileOpen(false)}
+            >
+              Blog
+            </Link>
             <Link
               href="/about"
               className={`py-3 ${linkClass('/about')}`}

@@ -9,7 +9,6 @@ import {
   formatMonths,
 } from '@/lib/calculators/debtPayoff'
 import { formatCurrency, formatShortDate } from '@/lib/format'
-import AdSenseSlot from '@/components/shared/AdSenseSlot'
 
 const DEBT_COLORS = [
   '#1B2E5E',
@@ -352,10 +351,6 @@ export default function DebtResultsPanel({
           </div>
         )}
       </div>
-
-      {/* This panel only mounts once results exist, so the ad is never
-          visible before the user clicks Calculate. */}
-      <AdSenseSlot slot="DEBT_CALC_RESULTS" />
     </section>
   )
 }
