@@ -1,6 +1,6 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
-import { TrendingDown, Wallet, Check, Rocket } from 'lucide-react'
+import { TrendingDown, Wallet, Check, Rocket, PiggyBank, PieChart } from 'lucide-react'
 import { SITE_NAME, SITE_URL } from '@/lib/constants'
 
 export const metadata: Metadata = {
@@ -50,6 +50,18 @@ const TOOLS = [
     name: 'Debt Payoff Calculator',
     description: 'See your debt-free date and compare payoff strategies.',
     href: '/debt-payoff-calculator',
+  },
+  {
+    icon: PiggyBank,
+    name: 'Savings Calculator',
+    description: 'See how your balance grows with compound interest.',
+    href: '/savings-calculator',
+  },
+  {
+    icon: PieChart,
+    name: 'Budget Calculator',
+    description: 'Split your take-home pay with the 50/30/20 rule.',
+    href: '/budget-calculator',
   },
 ]
 

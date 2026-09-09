@@ -9,6 +9,8 @@ import { SITE_NAME } from '@/lib/constants'
 const CALCULATORS = [
   { name: 'Paycheck Calculator', href: '/paycheck-calculator' },
   { name: 'Debt Payoff Calculator', href: '/debt-payoff-calculator' },
+  { name: 'Savings Calculator', href: '/savings-calculator' },
+  { name: 'Budget Calculator', href: '/budget-calculator' },
 ]
 
 export default function Navbar() {

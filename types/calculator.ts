@@ -63,3 +63,43 @@ export interface PaycheckResult {
   effectiveTotalRate: number // percentage
   payPeriods: number
 }
+
+// Savings calculator types
+
+export interface SavingsInput {
+  initialDeposit: number
+  monthlyContribution: number
+  annualRate: number // percentage
+  years: number
+}
+
+export interface SavingsYearRow {
+  year: number
+  startBalance: number
+  contributions: number
+  interestEarned: number
+  endBalance: number
+}
+
+export interface SavingsResult {
+  finalBalance: number
+  totalContributions: number // initial deposit + all monthly contributions
+  totalInterestEarned: number
+  yearlyBreakdown: SavingsYearRow[]
+}
+
+// Budget calculator types
+
+export interface BudgetCategory {
+  label: string
+  percent: number
+  amount: number
+  examples: string[]
+}
+
+export interface BudgetResult {
+  monthlyIncome: number
+  needs: BudgetCategory
+  wants: BudgetCategory
+  savings: BudgetCategory
+}

@@ -1,7 +1,7 @@
 import { ETSY_STORE_URL } from '@/lib/constants'
 
 interface EtsyCTAProps {
-  page: 'debt' | 'paycheck'
+  page: 'debt' | 'paycheck' | 'savings' | 'budget'
 }
 
 const COPY = {
@@ -10,6 +10,14 @@ const COPY = {
     subtext: 'Check out our Excel debt payoff templates on Etsy.',
   },
   paycheck: {
+    headline: 'Want a done-for-you budget template?',
+    subtext: 'Browse our Excel budget spreadsheets on Etsy.',
+  },
+  savings: {
+    headline: 'Want a savings tracker?',
+    subtext: 'Browse our Excel savings goal templates on Etsy.',
+  },
+  budget: {
     headline: 'Want a done-for-you budget template?',
     subtext: 'Browse our Excel budget spreadsheets on Etsy.',
   },
