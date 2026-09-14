@@ -355,8 +355,8 @@ export default function DebtResultsPanel({
 
       <MethodologyNote>
         <p>
-          This calculator uses standard amortization math to simulate your
-          debt payoff under two strategies.
+          This calculator uses standard monthly interest and payment
+          calculations to estimate your debt payoff under two strategies.
         </p>
         <p className="mt-3">
           Avalanche method: debts are sorted by interest rate, highest

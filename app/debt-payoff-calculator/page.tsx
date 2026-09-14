@@ -61,7 +61,7 @@ const debtFAQs: FAQItem[] = [
   {
     question: 'Is this calculator accurate?',
     answer:
-      'The calculator uses standard amortization math and provides a reliable estimate of your payoff timeline and total interest. Results assume your balances, interest rates, and payment amounts stay constant throughout the payoff period. Real-world results will vary if you miss payments, rates change, or you add new debt. Always verify with your lender for exact payoff figures.',
+      'The calculator uses standard monthly interest and payment calculations and provides a reliable estimate of your payoff timeline and total interest. Results assume your balances, interest rates, and payment amounts stay constant throughout the payoff period. Real-world results will vary if you miss payments, rates change, or you add new debt. Always verify with your lender for exact payoff figures.',
   },
 ]
 
