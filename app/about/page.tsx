@@ -34,42 +34,35 @@ export default function AboutPage() {
       <h1 className="text-4xl font-bold text-navy">About {SITE_NAME}</h1>
       <div className="mt-6 space-y-5 text-lg text-muted">
         <p>
-          {SITE_NAME} is a free personal finance website that helps you make
-          informed financial decisions with simple, accurate calculators. No
-          account is required, and your data is never stored. Every calculation
-          runs directly in your browser, so the information you enter stays on
-          your device.
+          {SITE_NAME} is a free personal finance website built around one
+          idea: financial math shouldn&apos;t require a finance degree to
+          understand.
         </p>
         <p>
-          Today, {SITE_NAME} includes a Paycheck Calculator that estimates your
-          take-home pay after taxes and deductions, and a Debt Payoff Calculator
-          that compares the avalanche and snowball methods to help you find the
-          fastest path to becoming debt free. More calculators are being added
-          to cover budgeting, taxes, loans, retirement, and other everyday
-          financial decisions.
+          Every calculator on {SITE_NAME} runs directly in your browser. The
+          numbers you enter never leave your device — no account required,
+          no data stored, no financial products to buy.
         </p>
         <p>
-          {SITE_NAME} was created to make everyday financial calculations
-          faster, simpler, and easier to understand. Too many financial tools
-          are cluttered with ads, unnecessary features, or confusing
-          explanations. Our goal is to build calculators that are genuinely
-          useful, fast, accurate, and privacy-first, so you can spend less
-          time figuring out the math and more time making confident financial
-          decisions.
+          We cover the calculations that come up in real life: understanding
+          your paycheck, planning your debt payoff, building a budget,
+          projecting your savings, and more. Each tool is designed to give
+          you a clear, honest answer — with plain-English explanations of
+          how the result was calculated and what it means.
+        </p>
+        <p>
+          {SITE_NAME} was built in San Francisco by a product manager who
+          got tired of financial tools that bury the answer in clutter,
+          upsells, and unnecessary complexity. These calculators exist
+          because everyone deserves clarity about their own money.
         </p>
       </div>
       <div className="mt-8 flex flex-col gap-3 sm:flex-row">
         <Link
-          href="/paycheck-calculator"
+          href="/"
           className="rounded-btn bg-navy px-5 py-2.5 text-center font-semibold text-white transition-colors hover:bg-[#16264d]"
         >
-          Paycheck Calculator →
-        </Link>
-        <Link
-          href="/debt-payoff-calculator"
-          className="rounded-btn border border-navy px-5 py-2.5 text-center font-semibold text-navy transition-colors hover:bg-navy hover:text-white"
-        >
-          Debt Payoff Calculator →
+          Explore our calculators →
         </Link>
       </div>
     </div>
