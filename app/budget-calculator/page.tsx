@@ -86,10 +86,12 @@ export default function BudgetCalculatorPage() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(webAppSchema) }}
       />
 
-      <h1 className="text-4xl font-bold text-navy">Budget Calculator</h1>
+      <h1 className="text-4xl font-bold text-navy">
+        50/30/20 Budget Calculator
+      </h1>
       <p className="mt-4 text-lg text-muted">
-        Enter your monthly take-home pay to see exactly how much to spend on
-        needs, wants, and savings using the popular 50/30/20 budgeting rule.
+        See how much of your take-home pay could go toward needs, wants,
+        savings, and extra debt payments.
       </p>
 
       <div className="mt-8">
@@ -107,13 +109,13 @@ export default function BudgetCalculatorPage() {
           The 50/30/20 rule is popular because it&apos;s simple enough to
           follow without tracking every category of spending down to the
           dollar. Rather than budgeting dozens of line items, you only need
-          to watch three buckets. It also builds savings in by design —
-          because 20% is earmarked for savings and extra debt payments
-          before you decide how to spend the rest, you&apos;re less likely
-          to reach the end of the month with nothing left over. For people
-          just starting to budget, that combination of simplicity and
-          built-in savings is often more sustainable than a highly detailed
-          system that&apos;s easy to abandon.
+          to watch three buckets. The framework also gives savings and
+          extra debt payments a dedicated 20% target, making it easier to
+          prioritize them rather than relying on whatever is left at the
+          end of the month. For people just starting to budget, that
+          combination of simplicity and built-in savings is often more
+          sustainable than a highly detailed system that&apos;s easy to
+          abandon.
         </p>
         <h2 className="mb-3 text-xl font-semibold text-navy">
           How to adjust the 50/30/20 rule to fit your life

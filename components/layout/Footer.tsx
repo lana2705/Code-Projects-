@@ -6,7 +6,7 @@ const LINKS = [
   { name: 'Paycheck Calculator', href: '/paycheck-calculator' },
   { name: 'Debt Payoff Calculator', href: '/debt-payoff-calculator' },
   { name: 'Savings Calculator', href: '/savings-calculator' },
-  { name: 'Budget Calculator', href: '/budget-calculator' },
+  { name: '50/30/20 Budget Calculator', href: '/budget-calculator' },
   { name: 'Blog', href: '/blog' },
   { name: 'About', href: '/about' },
   { name: 'Contact', href: '/contact' },

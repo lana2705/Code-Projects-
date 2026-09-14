@@ -59,7 +59,7 @@ const TOOLS = [
   },
   {
     icon: PieChart,
-    name: 'Budget Calculator',
+    name: '50/30/20 Budget Calculator',
     description: 'Split your take-home pay with the 50/30/20 rule.',
     href: '/budget-calculator',
   },

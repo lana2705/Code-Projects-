@@ -123,9 +123,9 @@ export default function BudgetResultsPanel({ result }: BudgetResultsPanelProps) 
           hobbies).
         </p>
         <p className="mt-3">
-          Savings target: 20% of take-home pay — contributions to
-          emergency fund, retirement accounts, investments, and extra debt
-          payments.
+          Savings &amp; extra debt payments target: 20% of take-home pay —
+          contributions to emergency fund, retirement accounts,
+          investments, and extra debt payments.
         </p>
         <p className="mt-3">
           These percentages are guidelines, not rules. High
