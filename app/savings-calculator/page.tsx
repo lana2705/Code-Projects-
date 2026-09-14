@@ -88,9 +88,8 @@ export default function SavingsCalculatorPage() {
 
       <h1 className="text-4xl font-bold text-navy">Savings Calculator</h1>
       <p className="mt-4 text-lg text-muted">
-        Enter a starting balance, a monthly contribution, and an interest
-        rate to see exactly how your savings compound over time — including
-        a year-by-year breakdown of contributions versus interest earned.
+        Enter a starting balance, monthly contribution, interest rate, and
+        savings goal to estimate how your savings could grow over time.
       </p>
 
       <div className="mt-8">

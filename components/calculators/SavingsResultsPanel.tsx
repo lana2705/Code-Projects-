@@ -256,22 +256,24 @@ export default function SavingsResultsPanel({
           growth over time.
         </p>
         <p className="mt-3">
-          Interest is compounded monthly at the annual rate divided by 12.
-          Monthly contributions are assumed to be made at the beginning of
-          each month.
+          The rate you enter is treated as APY (Annual Percentage Yield) —
+          the same rate advertised by savings accounts. Because APY already
+          reflects the effect of compounding, we don&apos;t simply divide it
+          by 12; instead we convert it to the equivalent monthly rate
+          (solving (1 + monthly rate)^12 − 1 = APY) so the monthly math
+          stays consistent with the annual figure you entered. Monthly
+          contributions are assumed to be made at the beginning of each
+          month.
         </p>
         <p className="mt-3">
           The goal-based projection calculates the exact month and year
           your balance will reach your savings goal based on your current
-          balance, monthly contribution, and interest rate.
+          balance, monthly contribution, and APY.
         </p>
         <p className="mt-3">
           Results are estimates. Actual savings growth depends on your
           account&apos;s specific APY, compounding schedule, deposit
-          timing, and any fees. Note that the interest rate shown is APY
-          (Annual Percentage Yield), which reflects the effect of
-          compounding and is the rate typically advertised by savings
-          accounts.
+          timing, and any fees.
         </p>
         <p className="mt-3 italic">Last updated: September 2026</p>
       </MethodologyNote>

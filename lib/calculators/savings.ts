@@ -12,6 +12,16 @@ function round2(n: number): number {
 }
 
 /**
+ * Converts an APY (Annual Percentage Yield) to its equivalent monthly rate.
+ * APY already reflects the effect of compounding, so it cannot simply be
+ * divided by 12 — that would understate the true periodic rate. Instead we
+ * solve (1 + monthlyRate)^12 - 1 = APY for monthlyRate.
+ */
+function apyToMonthlyRate(apyPercent: number): number {
+  return Math.pow(1 + apyPercent / 100, 1 / 12) - 1
+}
+
+/**
  * Compounds monthly: each month earns interest on the current balance, then
  * the monthly contribution is added. This slightly understates interest
  * compared to compounding-then-contributing-at-period-start, which matches
@@ -19,7 +29,7 @@ function round2(n: number): number {
  */
 export function calculateSavings(input: SavingsInput): SavingsResult {
   const { initialDeposit, monthlyContribution, annualRate, years } = input
-  const monthlyRate = annualRate / 100 / 12
+  const monthlyRate = apyToMonthlyRate(annualRate)
   const totalMonths = Math.round(years * 12)
 
   let balance = initialDeposit
@@ -76,7 +86,7 @@ export function calculateGoalDate(
     return { monthsToGoal: 0, goalReachDate: new Date(), willReachGoal: true }
   }
 
-  const monthlyRate = annualRate / 100 / 12
+  const monthlyRate = apyToMonthlyRate(annualRate)
   let balance = startingBalance
   let months = 0
   const maxMonths = 600 // 50 years cap

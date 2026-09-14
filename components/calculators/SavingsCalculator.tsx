@@ -48,7 +48,7 @@ export default function SavingsCalculator() {
       nextErrors.initialDeposit = 'Enter a valid starting amount'
     }
     if (annualRate.trim() === '' || isNaN(rate) || rate < 0 || rate > 100) {
-      nextErrors.annualRate = 'Enter an interest rate from 0 to 100'
+      nextErrors.annualRate = 'Enter an APY from 0 to 100'
     }
     if (years.trim() === '' || isNaN(yearsNum) || yearsNum <= 0 || yearsNum > 60) {
       nextErrors.years = 'Enter a number of years from 1 to 60'
@@ -117,12 +117,12 @@ export default function SavingsCalculator() {
           </div>
 
           <div>
-            <label className={labelClass}>Annual interest rate</label>
+            <label className={labelClass}>APY (Annual Percentage Yield)</label>
             <div className="relative">
               <input
                 type="number"
                 inputMode="decimal"
-                aria-label="Annual interest rate percent"
+                aria-label="APY (Annual Percentage Yield) percent"
                 placeholder="e.g. 4.5"
                 value={annualRate}
                 onChange={(e) => setAnnualRate(e.target.value)}
@@ -132,6 +132,9 @@ export default function SavingsCalculator() {
                 %
               </span>
             </div>
+            <p className="mt-1 text-xs italic text-[#9CA3AF]">
+              Use the APY your bank advertises — not a plain interest rate.
+            </p>
             {errors.annualRate && (
               <p className="mt-1 text-xs text-error">{errors.annualRate}</p>
             )}
