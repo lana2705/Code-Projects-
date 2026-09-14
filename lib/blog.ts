@@ -31,7 +31,7 @@ export const BLOG_POSTS: BlogPost[] = [
     description:
       "Pay off debt or invest — it's one of the most common personal finance questions. Here's a clear framework for making the right decision based on your interest rates and situation.",
     category: 'Debt',
-    publishedDate: '2026-08-28',
+    publishedDate: '2026-09-14',
   },
   {
     slug: '50-30-20-budget-rule',
@@ -39,7 +39,7 @@ export const BLOG_POSTS: BlogPost[] = [
     description:
       "The 50/30/20 budget rule divides your take-home pay into needs, wants, and savings. Here's how it works, whether it's realistic, and how to adapt it to your life.",
     category: 'Budgeting',
-    publishedDate: '2026-08-28',
+    publishedDate: '2026-09-14',
   },
   {
     slug: 'how-much-should-i-have-in-savings',
@@ -47,7 +47,7 @@ export const BLOG_POSTS: BlogPost[] = [
     description:
       "Wondering how much you should have saved? Here's a practical guide to savings benchmarks by age, income, and life stage — plus how to calculate your personal target.",
     category: 'Savings',
-    publishedDate: '2026-08-28',
+    publishedDate: '2026-09-14',
   },
   {
     slug: 'how-much-should-i-save-each-month',
@@ -55,6 +55,6 @@ export const BLOG_POSTS: BlogPost[] = [
     description:
       "Not sure how much to save each month? Here's how to calculate the right savings amount for your income, goals, and life stage — with real examples.",
     category: 'Savings',
-    publishedDate: '2026-08-28',
+    publishedDate: '2026-09-14',
   },
 ]

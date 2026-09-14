@@ -63,7 +63,7 @@ export default function FiftyThirtyTwentyBudgetRulePost() {
       <h1 className="text-4xl font-bold text-navy">
         What Is the 50/30/20 Budget Rule?
       </h1>
-      <p className="mt-2 text-sm text-muted">Published August 28, 2026</p>
+      <p className="mt-2 text-sm text-muted">Published September 14, 2026</p>
 
       <p className="mt-6 text-lg leading-relaxed text-muted">
         The 50/30/20 rule is a simple budgeting framework that divides your

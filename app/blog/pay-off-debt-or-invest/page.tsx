@@ -64,7 +64,7 @@ export default function PayOffDebtOrInvestPost() {
       <h1 className="text-4xl font-bold text-navy">
         Should I Pay Off Debt or Invest?
       </h1>
-      <p className="mt-2 text-sm text-muted">Published August 28, 2026</p>
+      <p className="mt-2 text-sm text-muted">Published September 14, 2026</p>
 
       <p className="mt-6 text-lg leading-relaxed text-muted">
         This is one of the most common questions in personal finance — and

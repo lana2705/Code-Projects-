@@ -64,7 +64,7 @@ export default function HowMuchShouldIHaveInSavingsPost() {
       <h1 className="text-4xl font-bold text-navy">
         How Much Should I Have in Savings?
       </h1>
-      <p className="mt-2 text-sm text-muted">Published August 28, 2026</p>
+      <p className="mt-2 text-sm text-muted">Published September 14, 2026</p>
 
       <p className="mt-6 text-lg leading-relaxed text-muted">
         There&apos;s no single answer that works for everyone — but there

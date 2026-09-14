@@ -71,7 +71,7 @@ export default function HowMuchShouldISaveEachMonthPost() {
       <h1 className="text-4xl font-bold text-navy">
         How Much Should I Save Each Month?
       </h1>
-      <p className="mt-2 text-sm text-muted">Published August 28, 2026</p>
+      <p className="mt-2 text-sm text-muted">Published September 14, 2026</p>
 
       <p className="mt-6 text-lg leading-relaxed text-muted">
         The honest answer: as much as you sustainably can. The practical
