@@ -9,6 +9,7 @@ import {
   formatMonths,
 } from '@/lib/calculators/debtPayoff'
 import { formatCurrency, formatShortDate } from '@/lib/format'
+import MethodologyNote from '@/components/shared/MethodologyNote'
 
 const DEBT_COLORS = [
   '#1B2E5E',
@@ -351,6 +352,37 @@ export default function DebtResultsPanel({
           </div>
         )}
       </div>
+
+      <MethodologyNote>
+        <p>
+          This calculator uses standard amortization math to simulate your
+          debt payoff under two strategies.
+        </p>
+        <p className="mt-3">
+          Avalanche method: debts are sorted by interest rate, highest
+          first. Minimum payments are applied to all debts each month. Any
+          extra payment is applied to the highest-rate debt. When a debt is
+          fully paid off, its freed payment rolls into the next
+          highest-rate debt automatically.
+        </p>
+        <p className="mt-3">
+          Snowball method: debts are sorted by balance, lowest first. The
+          same logic applies — minimums on all debts, extra payment on the
+          priority debt, automatic rollover when a debt is paid off.
+        </p>
+        <p className="mt-3">
+          Interest is calculated monthly (annual rate ÷ 12) on the
+          outstanding balance. Calculations assume interest rates,
+          balances, and payment amounts remain constant throughout the
+          payoff period.
+        </p>
+        <p className="mt-3">
+          Results are estimates. Actual payoff timelines will vary if you
+          miss payments, interest rates change, or new debt is added.
+          Verify payoff projections with your lender.
+        </p>
+        <p className="mt-3 italic">Last updated: September 2026</p>
+      </MethodologyNote>
     </section>
   )
 }

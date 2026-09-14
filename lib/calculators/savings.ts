@@ -1,6 +1,11 @@
-import type { SavingsInput, SavingsResult, SavingsYearRow } from '@/types/calculator'
+import type {
+  SavingsInput,
+  SavingsResult,
+  SavingsYearRow,
+  SavingsGoalResult,
+} from '@/types/calculator'
 
-export type { SavingsInput, SavingsResult, SavingsYearRow }
+export type { SavingsInput, SavingsResult, SavingsYearRow, SavingsGoalResult }
 
 function round2(n: number): number {
   return Math.round((n + Number.EPSILON) * 100) / 100
@@ -54,4 +59,49 @@ export function calculateSavings(input: SavingsInput): SavingsResult {
     totalInterestEarned: round2(finalBalance - totalContributions),
     yearlyBreakdown,
   }
+}
+
+/** Calculate the month the balance first equals or exceeds the goal. */
+export function calculateGoalDate(
+  startingBalance: number,
+  monthlyContribution: number,
+  annualRate: number,
+  goalAmount: number,
+): SavingsGoalResult {
+  if (!goalAmount || goalAmount <= 0) {
+    return { monthsToGoal: null, goalReachDate: null, willReachGoal: false }
+  }
+
+  if (startingBalance >= goalAmount) {
+    return { monthsToGoal: 0, goalReachDate: new Date(), willReachGoal: true }
+  }
+
+  const monthlyRate = annualRate / 100 / 12
+  let balance = startingBalance
+  let months = 0
+  const maxMonths = 600 // 50 years cap
+
+  while (balance < goalAmount && months < maxMonths) {
+    balance = balance * (1 + monthlyRate) + monthlyContribution
+    months++
+  }
+
+  if (months >= maxMonths) {
+    return { monthsToGoal: null, goalReachDate: null, willReachGoal: false }
+  }
+
+  const goalDate = new Date()
+  goalDate.setMonth(goalDate.getMonth() + months)
+
+  return { monthsToGoal: months, goalReachDate: goalDate, willReachGoal: true }
+}
+
+/** Human-readable months → "2 years and 7 months" (or "1 month", "3 years"). */
+export function formatYearsAndMonths(months: number): string {
+  const years = Math.floor(months / 12)
+  const rem = months % 12
+  const parts: string[] = []
+  if (years > 0) parts.push(`${years} year${years !== 1 ? 's' : ''}`)
+  if (rem > 0) parts.push(`${rem} month${rem !== 1 ? 's' : ''}`)
+  return parts.join(' and ') || '0 months'
 }

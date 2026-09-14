@@ -3,6 +3,7 @@
 import { useMemo } from 'react'
 import type { PaycheckResult } from '@/types/calculator'
 import { formatCurrency, formatPercent } from '@/lib/format'
+import MethodologyNote from '@/components/shared/MethodologyNote'
 
 interface PaycheckResultsPanelProps {
   result: PaycheckResult
@@ -216,6 +217,42 @@ export default function PaycheckResultsPanel({
         elections, deductions, and credits. Consult a tax professional for
         precise figures.
       </p>
+
+      <MethodologyNote>
+        <p>
+          This calculator estimates your take-home pay using 2026 federal
+          income tax brackets and flat state income tax rates.
+        </p>
+        <p className="mt-3">
+          Federal income tax is calculated using progressive brackets — you
+          pay each rate only on the portion of income within that bracket,
+          not on your total income. The standard deduction for your filing
+          status is subtracted from gross income before applying brackets.
+        </p>
+        <p className="mt-3">
+          Social Security is calculated at 6.2% on wages up to $168,600.
+          Medicare is calculated at 1.45% on all wages, with an additional
+          0.9% on wages over $200,000 (single filers) or $250,000 (married
+          filing jointly).
+        </p>
+        <p className="mt-3">
+          State income tax uses a flat effective rate estimate for each
+          state. Actual state tax calculations use progressive brackets in
+          most states, so your real state tax may differ from this
+          estimate.
+        </p>
+        <p className="mt-3">
+          Pre-tax deductions (401(k) contributions and health insurance
+          premiums) reduce your taxable income before federal and state tax
+          is applied.
+        </p>
+        <p className="mt-3">
+          Results are estimates. Actual withholding depends on your W-4
+          elections, employer-specific deductions, local taxes, and other
+          factors not captured here.
+        </p>
+        <p className="mt-3 italic">Last updated: September 2026</p>
+      </MethodologyNote>
     </section>
   )
 }

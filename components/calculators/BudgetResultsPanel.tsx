@@ -3,6 +3,7 @@
 import { useMemo } from 'react'
 import type { BudgetResult } from '@/types/calculator'
 import { formatCurrency } from '@/lib/format'
+import MethodologyNote from '@/components/shared/MethodologyNote'
 
 interface BudgetResultsPanelProps {
   result: BudgetResult
@@ -105,6 +106,40 @@ export default function BudgetResultsPanel({ result }: BudgetResultsPanelProps) 
         Adjust the percentages to fit your own cost of living, goals, and
         priorities.
       </p>
+
+      <MethodologyNote>
+        <p>
+          This calculator applies the 50/30/20 budgeting framework to your
+          monthly take-home pay.
+        </p>
+        <p className="mt-3">
+          Needs target: 50% of take-home pay — essential expenses you must
+          pay (housing, utilities, groceries, transportation, insurance,
+          minimum debt payments).
+        </p>
+        <p className="mt-3">
+          Wants target: 30% of take-home pay — discretionary spending on
+          things you choose (dining out, entertainment, subscriptions,
+          hobbies).
+        </p>
+        <p className="mt-3">
+          Savings target: 20% of take-home pay — contributions to
+          emergency fund, retirement accounts, investments, and extra debt
+          payments.
+        </p>
+        <p className="mt-3">
+          These percentages are guidelines, not rules. High
+          cost-of-living areas may push needs above 50%. Aggressive debt
+          payoff may temporarily reduce wants. Adjust the framework to fit
+          your actual situation.
+        </p>
+        <p className="mt-3">
+          Enter your monthly take-home pay — after taxes and pre-tax
+          deductions — not your gross salary. Use our Paycheck Calculator
+          if you need help finding your take-home amount.
+        </p>
+        <p className="mt-3 italic">Last updated: September 2026</p>
+      </MethodologyNote>
     </section>
   )
 }

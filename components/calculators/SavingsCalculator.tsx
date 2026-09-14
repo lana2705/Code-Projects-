@@ -1,8 +1,8 @@
 'use client'
 
 import { useState, useRef, useEffect } from 'react'
-import type { SavingsResult } from '@/types/calculator'
-import { calculateSavings } from '@/lib/calculators/savings'
+import type { SavingsResult, SavingsGoalResult } from '@/types/calculator'
+import { calculateSavings, calculateGoalDate } from '@/lib/calculators/savings'
 import SavingsResultsPanel from './SavingsResultsPanel'
 import CurrencyInput from '@/components/shared/CurrencyInput'
 import { parseCurrencyInput } from '@/lib/format'
@@ -16,6 +16,7 @@ export default function SavingsCalculator() {
   const [monthlyContribution, setMonthlyContribution] = useState('')
   const [annualRate, setAnnualRate] = useState('')
   const [years, setYears] = useState('')
+  const [savingsGoal, setSavingsGoal] = useState('')
 
   const [errors, setErrors] = useState<{
     initialDeposit?: string
@@ -23,6 +24,8 @@ export default function SavingsCalculator() {
     years?: string
   }>({})
   const [result, setResult] = useState<SavingsResult | null>(null)
+  const [goalResult, setGoalResult] = useState<SavingsGoalResult | null>(null)
+  const [goalAmount, setGoalAmount] = useState(0)
   const resultsRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
@@ -56,17 +59,31 @@ export default function SavingsCalculator() {
       return
     }
 
+    const depositValue = Math.max(0, deposit || 0)
+    const contributionValue = Math.max(
+      0,
+      parseCurrencyInput(monthlyContribution) || 0,
+    )
+
     setResult(
       calculateSavings({
-        initialDeposit: Math.max(0, deposit || 0),
-        monthlyContribution: Math.max(
-          0,
-          parseCurrencyInput(monthlyContribution) || 0,
-        ),
+        initialDeposit: depositValue,
+        monthlyContribution: contributionValue,
         annualRate: rate,
         years: yearsNum,
       }),
     )
+
+    const goal = savingsGoal.trim() ? parseCurrencyInput(savingsGoal) : 0
+    if (!isNaN(goal) && goal > 0) {
+      setGoalAmount(goal)
+      setGoalResult(
+        calculateGoalDate(depositValue, contributionValue, rate, goal),
+      )
+    } else {
+      setGoalAmount(0)
+      setGoalResult(null)
+    }
   }
 
   return (
@@ -136,6 +153,20 @@ export default function SavingsCalculator() {
           </div>
         </div>
 
+        <div className="mt-5 max-w-sm">
+          <label className={labelClass}>Savings goal (optional)</label>
+          <CurrencyInput
+            aria-label="Savings goal"
+            placeholder="$0.00"
+            value={savingsGoal}
+            onChange={setSavingsGoal}
+            className={inputClass}
+          />
+          <p className="mt-1 text-xs italic text-[#9CA3AF]">
+            Enter a target amount to see when you&apos;ll reach it.
+          </p>
+        </div>
+
         <button
           type="button"
           onClick={handleCalculate}
@@ -148,7 +179,11 @@ export default function SavingsCalculator() {
       {result && (
         <div ref={resultsRef} className="scroll-mt-20">
           <hr className="my-6 border-0 border-t border-border" />
-          <SavingsResultsPanel result={result} />
+          <SavingsResultsPanel
+            result={result}
+            goalResult={goalResult}
+            goalAmount={goalAmount}
+          />
         </div>
       )}
     </div>

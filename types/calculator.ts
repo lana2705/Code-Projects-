@@ -88,6 +88,12 @@ export interface SavingsResult {
   yearlyBreakdown: SavingsYearRow[]
 }
 
+export interface SavingsGoalResult {
+  monthsToGoal: number | null // null if goal not set or unreachable in timeframe
+  goalReachDate: Date | null
+  willReachGoal: boolean
+}
+
 // Budget calculator types
 
 export interface BudgetCategory {

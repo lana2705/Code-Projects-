@@ -52,9 +52,14 @@ export default function BlogIndexPage() {
             href={`/blog/${post.slug}`}
             className="block rounded-card border border-border bg-surface p-6 transition-shadow hover:shadow-md"
           >
-            <p className="text-xs font-medium uppercase tracking-wide text-muted">
-              {formatDate(post.publishedDate)}
-            </p>
+            <div className="flex items-center gap-3">
+              <span className="rounded-full bg-navy/10 px-2.5 py-0.5 text-xs font-semibold text-navy">
+                {post.category}
+              </span>
+              <p className="text-xs font-medium uppercase tracking-wide text-muted">
+                {formatDate(post.publishedDate)}
+              </p>
+            </div>
             <h2 className="mt-2 text-xl font-semibold text-navy">
               {post.title}
             </h2>

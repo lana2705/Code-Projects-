@@ -2,15 +2,21 @@
 
 import { useMemo, useState } from 'react'
 import { ChevronDown } from 'lucide-react'
-import type { SavingsResult } from '@/types/calculator'
-import { formatCurrency } from '@/lib/format'
+import type { SavingsResult, SavingsGoalResult } from '@/types/calculator'
+import { formatCurrency, formatMonthYear } from '@/lib/format'
+import { formatYearsAndMonths } from '@/lib/calculators/savings'
+import MethodologyNote from '@/components/shared/MethodologyNote'
 
 interface SavingsResultsPanelProps {
   result: SavingsResult
+  goalResult?: SavingsGoalResult | null
+  goalAmount?: number
 }
 
 export default function SavingsResultsPanel({
   result,
+  goalResult,
+  goalAmount = 0,
 }: SavingsResultsPanelProps) {
   const { finalBalance, totalContributions, totalInterestEarned, yearlyBreakdown } =
     result
@@ -43,6 +49,54 @@ export default function SavingsResultsPanel({
 
   return (
     <section className="my-10">
+      {/* Goal callout */}
+      {goalResult && goalResult.willReachGoal && goalResult.goalReachDate && (
+        <div
+          className="mb-6 rounded-[8px] border px-6 py-5"
+          style={{ backgroundColor: '#F0FDF4', borderColor: '#BBF7D0' }}
+        >
+          <p className="text-[13px] text-muted">
+            🎯 Goal:{' '}
+            <span className="text-xl font-bold text-navy">
+              {formatCurrency(goalAmount, 0)}
+            </span>
+          </p>
+          {goalResult.monthsToGoal === 0 ? (
+            <p className="mt-2 text-[28px] font-bold text-accent">
+              You&apos;re already there!
+            </p>
+          ) : (
+            <>
+              <p className="mt-3 text-sm text-muted">
+                You&apos;ll reach your goal in
+              </p>
+              <p className="text-[28px] font-bold text-accent">
+                {formatMonthYear(goalResult.goalReachDate)}
+              </p>
+              <p className="mt-1 text-[13px] text-muted">
+                That&apos;s {formatYearsAndMonths(goalResult.monthsToGoal ?? 0)}{' '}
+                from now.
+              </p>
+            </>
+          )}
+        </div>
+      )}
+      {goalResult && !goalResult.willReachGoal && goalAmount > 0 && (
+        <div
+          className="mb-6 rounded-[8px] border px-6 py-5"
+          style={{ backgroundColor: '#FFF9F0', borderColor: '#FCD34D' }}
+        >
+          <p className="text-[13px]" style={{ color: '#92400E' }}>
+            ⚠️ At your current rate, you won&apos;t reach{' '}
+            {formatCurrency(goalAmount, 0)} within your selected timeframe.
+          </p>
+          <p className="mt-2 text-[13px]" style={{ color: '#92400E' }}>
+            Try increasing your monthly contribution or extending the time
+            period.
+          </p>
+        </div>
+      )}
+
       {/* Hero number */}
       <div className="rounded-card border border-border bg-surface p-6 text-center">
         <p className="text-sm text-muted">Your savings will grow to</p>
@@ -195,6 +249,32 @@ export default function SavingsResultsPanel({
         monthly. Actual returns vary with real-world interest rate changes,
         fees, and taxes on interest earned.
       </p>
+
+      <MethodologyNote>
+        <p>
+          This calculator uses compound interest math to project savings
+          growth over time.
+        </p>
+        <p className="mt-3">
+          Interest is compounded monthly at the annual rate divided by 12.
+          Monthly contributions are assumed to be made at the beginning of
+          each month.
+        </p>
+        <p className="mt-3">
+          The goal-based projection calculates the exact month and year
+          your balance will reach your savings goal based on your current
+          balance, monthly contribution, and interest rate.
+        </p>
+        <p className="mt-3">
+          Results are estimates. Actual savings growth depends on your
+          account&apos;s specific APY, compounding schedule, deposit
+          timing, and any fees. Note that the interest rate shown is APY
+          (Annual Percentage Yield), which reflects the effect of
+          compounding and is the rate typically advertised by savings
+          accounts.
+        </p>
+        <p className="mt-3 italic">Last updated: September 2026</p>
+      </MethodologyNote>
     </section>
   )
 }
