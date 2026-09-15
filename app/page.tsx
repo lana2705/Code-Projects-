@@ -54,13 +54,15 @@ const TOOLS = [
   {
     icon: PiggyBank,
     name: 'Savings Calculator',
-    description: 'See how your balance grows with compound interest.',
+    description:
+      "See how your savings could grow over time and when you'll reach your goal.",
     href: '/savings-calculator',
   },
   {
     icon: PieChart,
     name: '50/30/20 Budget Calculator',
-    description: 'Split your take-home pay with the 50/30/20 rule.',
+    description:
+      'See how much to allocate to needs, wants, and savings with the 50/30/20 rule.',
     href: '/budget-calculator',
   },
 ]
@@ -135,8 +137,7 @@ export default function HomePage() {
             <Rocket size={16} aria-hidden="true" />
           </span>
           <p className="text-sm text-muted">
-            More tools coming soon — built for anyone who wants clarity about
-            their money.
+            More free financial calculators are on the way.
           </p>
         </div>
       </section>
