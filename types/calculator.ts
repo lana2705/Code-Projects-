@@ -109,3 +109,65 @@ export interface BudgetResult {
   wants: BudgetCategory
   savings: BudgetCategory
 }
+
+// Mortgage calculator types
+
+export interface MortgageInputs {
+  homePrice: number
+  downPayment: number
+  loanTermYears: number
+  annualInterestRate: number
+  startDate: Date
+  annualPropertyTax?: number
+  annualInsurance?: number
+  monthlyHOA?: number
+  pmiRate?: number // stored as decimal: 0.005 = 0.5%
+  extraMonthlyPayment?: number
+}
+
+export interface AmortizationMonth {
+  month: number
+  date: Date
+  payment: number // P&I + estimatedPMI for that month (tax/insurance/HOA excluded)
+  principal: number
+  interest: number
+  estimatedPMI: number
+  remainingBalance: number
+  cumulativeInterest: number
+}
+
+export interface MortgageResult {
+  loanAmount: number
+  monthlyPrincipalAndInterest: number
+  firstMonthPrincipal: number
+  firstMonthInterest: number
+  monthlyPropertyTax: number
+  monthlyInsurance: number
+  monthlyHOA: number
+  estimatedMonthlyPMI: number
+  totalMonthlyPayment: number // P&I + tax + insurance + HOA + PMI
+  totalInterestPaid: number
+  totalMortgagePayments: number // principal + interest only
+  payoffDate: Date
+  downPaymentPercent: number
+
+  pmiScheduledCancellationMonth: number | null // 80% LTV — request-eligibility only
+  pmiScheduledCancellationDate: Date | null
+  pmiScheduledTerminationMonth: number | null // 78% LTV — automatic termination
+  pmiScheduledTerminationDate: Date | null
+  pmiMidpointTerminationMonth: number | null // loan midpoint + 1
+  pmiDisplayedTerminationMonth: number | null // earlier of 78% termination and midpoint
+  pmiDisplayedTerminationDate: Date | null
+
+  amortizationSchedule: AmortizationMonth[]
+}
+
+export interface MortgageExtraPaymentResult {
+  payoffMonth: number
+  payoffDate: Date
+  totalInterest: number
+  monthsSaved: number
+  interestSaved: number
+  actualCancellationEligibleMonthWithExtraPayments: number | null
+  actualCancellationEligibleDateWithExtraPayments: Date | null
+}
