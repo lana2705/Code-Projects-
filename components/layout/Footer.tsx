@@ -8,6 +8,7 @@ const LINKS = [
   { name: 'Savings Calculator', href: '/savings-calculator' },
   { name: '50/30/20 Budget Calculator', href: '/budget-calculator' },
   { name: 'Mortgage Calculator', href: '/mortgage-calculator' },
+  { name: 'Retirement Calculator', href: '/retirement-calculator' },
   { name: 'Blog', href: '/blog' },
   { name: 'About', href: '/about' },
   { name: 'Contact', href: '/contact' },

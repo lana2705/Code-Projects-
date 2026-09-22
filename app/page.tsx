@@ -1,6 +1,6 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
-import { TrendingDown, Wallet, Check, Rocket, PiggyBank, PieChart, Home } from 'lucide-react'
+import { TrendingDown, Wallet, Check, Rocket, PiggyBank, PieChart, Home, Landmark } from 'lucide-react'
 import { SITE_NAME, SITE_URL } from '@/lib/constants'
 
 export const metadata: Metadata = {
@@ -71,6 +71,13 @@ const TOOLS = [
     description:
       'Estimate your monthly payment, PMI, and full amortization schedule.',
     href: '/mortgage-calculator',
+  },
+  {
+    icon: Landmark,
+    name: 'Retirement Calculator',
+    description:
+      "See if you're on track to retire and what happens if you save more.",
+    href: '/retirement-calculator',
   },
 ]
 

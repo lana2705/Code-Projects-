@@ -171,3 +171,65 @@ export interface MortgageExtraPaymentResult {
   actualCancellationEligibleMonthWithExtraPayments: number | null
   actualCancellationEligibleDateWithExtraPayments: Date | null
 }
+
+// Retirement calculator types
+
+export interface RetirementInputs {
+  currentAge: number
+  retirementAge: number
+  currentSavings: number
+  annualIncome: number
+  contributionType: 'dollar' | 'percent' // how the user entered the contribution
+  monthlyContribution: number // always in dollars by the time it reaches the calculator
+  contributionRate: number // 0.10 for 10%; 0 if contributionType is 'dollar'
+  employerMatchRate: number // e.g. 0.03 for 3% effective match
+  expectedAnnualReturn: number // e.g. 0.07 for 7%
+  inflationRate: number // e.g. 0.025 for 2.5%
+  desiredMonthlyIncome: number // in today's dollars
+  socialSecurityMonthly: number // in today's dollars, 0 if none
+  yearsOfRetirement: number // integer, 1-70
+}
+
+export interface RetirementYear {
+  age: number
+  year: number
+  balance: number
+  balanceInTodaysDollars: number
+  annualContribution: number
+  annualEmployerMatch: number
+  annualGrowth: number
+  cumulativeContributions: number
+  cumulativeGrowth: number
+}
+
+export type RetirementOnTrackStatus =
+  | 'on_track'
+  | 'slightly_behind'
+  | 'significantly_behind'
+  | 'surplus'
+
+export interface RetirementResult {
+  projectedBalance: number
+  projectedBalanceInTodaysDollars: number
+  yearsToRetirement: number
+  totalContributions: number
+  totalEmployerMatch: number
+  totalGrowth: number
+
+  requiredNestEgg: number
+  estimatedMonthlyWithdrawal: number
+  socialSecurityMonthly: number
+  totalMonthlyIncome: number
+  monthlyIncomeGap: number
+
+  desiredMonthlyIncomeNominal: number
+  socialSecurityNominal: number
+
+  onTrackStatus: RetirementOnTrackStatus
+  fundingPercentage: number
+
+  additionalMonthlySavingsNeeded: number
+  retireEarlierAge: number | null
+
+  yearlyProjections: RetirementYear[]
+}
